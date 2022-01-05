@@ -6,8 +6,6 @@ import android.app.Application
 import org.wit.localevents.models.EventMemStore
 import org.wit.localevents.models.UserMemStore
 
-
-
 import timber.log.Timber
 import timber.log.Timber.i
 

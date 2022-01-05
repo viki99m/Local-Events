@@ -21,10 +21,16 @@ class UserMemStore : UserStore {
             return users
         }
 
-        override fun create(user: User) {
-            user.id = getIdUser()
-            users.add(user)
-            logAll()
+        override fun create(user: User): Boolean {
+            var founduser: User? = users.find { p -> p.username == user.username }
+            if(founduser == null){
+                user.id = getIdUser()
+                users.add(user)
+                logAll()
+                return true
+            }else{
+                return false
+            }
         }
 
         override fun updateUsername(user: User) {

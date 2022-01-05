@@ -6,5 +6,6 @@
     <string name="button_login">Login</string>
     <string name="hint_enter_password">Enter a password</string>
     <string name="hint_enter_username">Enter a username</string>
-    <string name="hint_wrong_user_data">Username or Password are wrong</string>
+    <string name="hint_wrong_user_data">username or password are wrong</string>
+    <string name="hint_username_exist">username already exists </string>
 </resources>

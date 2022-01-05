@@ -8,7 +8,7 @@ import org.wit.localevents.databinding.ActivityLoginBinding
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.User
 import timber.log.Timber
-
+import timber.log.Timber.i
 
 
 class LoginActivity : AppCompatActivity(){
@@ -19,7 +19,6 @@ class LoginActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.plant(Timber.DebugTree())
         Timber.i("Login Activity starts")
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,12 +31,16 @@ class LoginActivity : AppCompatActivity(){
                 Snackbar.make(it, R.string.hint_enter_username, Snackbar.LENGTH_LONG)
                     .show()
             }else if(user.password.isEmpty()) {
-                Snackbar.make(it, R.string.hint_enter_password,Snackbar.LENGTH_LONG)
+                Snackbar.make(it, R.string.hint_enter_password,Snackbar.LENGTH_LONG).show()
             }else {
                 //if (edit) {
                 //    app.events.update(event.copy())
                 //} else {
-                    app.users.create(user.copy())
+                    var check =app.users.create(user.copy())
+                    if (!check){
+                        Snackbar.make(it, R.string.hint_username_exist,Snackbar.LENGTH_LONG).show()
+                    }
+
                 //}
             }
             setResult(RESULT_OK)
@@ -57,6 +60,7 @@ class LoginActivity : AppCompatActivity(){
                     Snackbar.make(it, R.string.hint_wrong_user_data, Snackbar.LENGTH_LONG)
                         .show()
                 }else{
+                    i("Login successful")
                     // to next activity
                 }
             }
