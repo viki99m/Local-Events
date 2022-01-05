@@ -29,6 +29,7 @@ tools:context=".activities.EventActivity">
             android:layout_height="wrap_content"
             app:titleTextColor="@color/black" />
     </com.google.android.material.appbar.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

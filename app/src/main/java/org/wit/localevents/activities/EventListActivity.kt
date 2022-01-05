@@ -27,7 +27,7 @@ class EventListActivity : AppCompatActivity(), EventListener {
         binding = ActivityEventListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbar.title = "Local Event"
+        //binding.toolbar.title = "Local Event"
        // setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
