@@ -1,14 +1,16 @@
 package org.wit.localevents.main
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import android.app.Application
 
 import timber.log.Timber
 import timber.log.Timber.i
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class MainApp : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Local Events started")
     }
