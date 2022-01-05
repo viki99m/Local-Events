@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/activity_event.xml" value="0.13858695652173914" />
+        <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/activity_event_list.xml" value="0.13858695652173914" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/activity_login.xml" value="0.27560050568900124" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/login_activity.xml" value="0.16666666666666666" />

@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LocalEvents">
         <activity
+            android:name=".activities.EventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.EventListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
