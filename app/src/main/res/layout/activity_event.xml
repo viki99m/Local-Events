@@ -18,7 +18,7 @@ tools:context=".activities.EventActivity">
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/white"
         android:fitsSystemWindows="true"
         app:elevation="0dip"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -27,7 +27,7 @@ tools:context=".activities.EventActivity">
             android:id="@+id/toolbarAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleTextColor="@color/colorPrimary" />
+            app:titleTextColor="@color/black" />
     </com.google.android.material.appbar.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -41,60 +41,110 @@ tools:context=".activities.EventActivity">
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/placemarkTitle"
+                android:id="@+id/event_name"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:autofillHints="hint"
-                android:hint="@string/hint_placemarkTitle"
+                android:hint="@string/hint_event_name"
                 android:inputType="text"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/description"
+                android:id="@+id/event_description"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:autofillHints="hint"
-                android:hint="@string/hint_placemarkDescription"
+                android:hint="@string/hint_event_description"
                 android:inputType="text"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/event_organizer"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:autofillHints="hint"
+                android:hint="@string/hint_event_organizer"
+                android:inputType="text"
+                android:maxLength="25"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <NumberPicker
+                android:id="@+id/event_costs"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:autofillHints="hint"
+                android:hint="@string/hint_event_costs"
+                android:inputType="text"
+                android:maxLength="25"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/chooseImage"
+                android:id="@+id/event_chooseImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="@color/colorAccent"
-                android:paddingBottom="8dp"
+                android:background="@color/purple_3"
                 android:paddingTop="8dp"
-                android:text="@string/button_addImage"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp"/>
+                android:paddingBottom="8dp"
+                android:text="@string/button_event_image"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
             <ImageView
-                android:id="@+id/placemarkImage"
+                android:id="@+id/eventImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"/>
-
+                app:srcCompat="@mipmap/ic_launcher" />
             <Button
-                android:id="@+id/btnAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="@color/colorAccent"
+                android:background="@color/purple_3"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/button_event_location"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+
+            <DatePicker
+                android:id="@+id/event_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TimePicker
+                android:id="@+id/event_time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            <Button
+                android:id="@+id/button_add_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@color/purple_3"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:stateListAnimator="@null"
-                android:text="@string/button_addPlacemark"
+                android:text="@string/button_event_add"
                 android:textColor="#212121"
                 android:textSize="16sp" />
         </LinearLayout>

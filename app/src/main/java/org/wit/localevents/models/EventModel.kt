@@ -13,7 +13,7 @@ data class EventModel(
     var description: String = "",
     var costs: Float= 0.0F,
     var date: Timestamp = Timestamp(0),
-    var organizer: User = User(),
+    var organizer: String = "",
     var location: Location = Location(""),
     var image: Uri = Uri.EMPTY
 ):Parcelable

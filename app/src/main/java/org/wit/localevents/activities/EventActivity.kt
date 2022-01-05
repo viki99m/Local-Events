@@ -1,17 +1,5 @@
 package org.wit.localevents.activities
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import org.wit.localevents.R
-
-class EventActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event)
-    }
-}
-package org.wit.placemark.activities
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,68 +9,74 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
-import org.wit.placemark.R
-import org.wit.placemark.databinding.ActivityPlacemarkBinding
-import org.wit.placemark.helpers.showImagePicker
-import org.wit.placemark.main.MainApp
-import org.wit.placemark.models.PlacemarkModel
+import org.wit.localevents.R
+import org.wit.localevents.databinding.ActivityEventBinding
+import org.wit.localevents.helpers.showImagePicker
+import org.wit.localevents.main.MainApp
+import org.wit.localevents.models.EventModel
 import timber.log.Timber
 import timber.log.Timber.i
 
-class PlacemarkActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPlacemarkBinding
-    var placemark = PlacemarkModel()
+class EventActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityEventBinding
+    var event = EventModel()
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var edit = false
-        binding = ActivityPlacemarkBinding.inflate(layoutInflater)
+        binding = ActivityEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.toolbarAdd.title = title
-        setSupportActionBar(binding.toolbarAdd)
+        binding.toolbarAdd.title = "Local Events"
+        //setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
 
 
-        if (intent.hasExtra("placemark_edit")) {
+        if (intent.hasExtra("event_edit")) {
             edit = true
-            placemark = intent.extras?.getParcelable("placemark_edit")!!
-            binding.placemarkTitle.setText(placemark.title)
-            binding.description.setText(placemark.description)
-            binding.btnAdd.setText(R.string.save_placemark)
+            event = intent.extras?.getParcelable("event_edit")!!
+            binding.eventName.setText(event.name)
+            binding.eventDescription.setText(event.description)
+          //  binding.eventCosts.se(event.costs)
+            binding.eventOrganizer.setText(event.organizer)
+            //binding.eventDate.setDate
+            //binding.eventTime.setOnTimeChangedListener(binding.eventTime)
+            // Location
+            binding.buttonAddEvent.setText(R.string.button_event_add)
             Picasso.get()
-                .load(placemark.image)
-                .into(binding.placemarkImage)
+                .load(event.image)
+                .into(binding.eventImage)
         }
 
-        binding.btnAdd.setOnClickListener() {
-            placemark.title = binding.placemarkTitle.text.toString()
-            placemark.description = binding.description.text.toString()
-            if (placemark.title.isEmpty()) {
-                Snackbar.make(it,R.string.enter_placemark_title, Snackbar.LENGTH_LONG)
+        binding.buttonAddEvent.setOnClickListener() {
+            event.name= binding.eventName.text.toString()
+            event.organizer= binding.eventOrganizer.text.toString()
+            event.description = binding.eventDescription.text.toString()
+           // event.costs= binding.eventCosts.text.toString()
+
+            if (event.name.isEmpty()) {
+                Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)
                     .show()
             } else {
                 if (edit) {
-                    app.placemarks.update(placemark.copy())
+                    app.events.update(event.copy())
                 } else {
-                    app.placemarks.create(placemark.copy())
+                    app.events.create(event.copy())
                 }
             }
             setResult(RESULT_OK)
             finish()
         }
-        binding.chooseImage.setOnClickListener {
+        binding.eventChooseImage.setOnClickListener {
             i("Select image")
-        }
-        binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
         registerImagePickerCallback()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_placemark, menu)
+   override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_event, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -100,10 +94,10 @@ class PlacemarkActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            placemark.image = result.data!!.data!!
+                            event.image = result.data!!.data!!
                             Picasso.get()
-                                .load(placemark.image)
-                                .into(binding.placemarkImage)
+                                .load(event.image)
+                                .into(binding.eventImage)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
