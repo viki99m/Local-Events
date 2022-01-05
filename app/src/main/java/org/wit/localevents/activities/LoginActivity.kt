@@ -16,5 +16,9 @@ class LoginActivity : AppCompatActivity(){
         Timber.i("Login Activity starts")
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.btnSignin.setOnClickListener() {
+
+        }
     }
+
 }
