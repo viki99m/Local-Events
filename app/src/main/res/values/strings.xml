@@ -2,5 +2,9 @@
     <string name="app_name">Local Events</string>
     <string name="hint_login_name">Enter your username</string>
     <string name="hint_login_password">Enter your password</string>
-    <string name="button_sign_in">Sign in</string>
+    <string name="button_sign_in">Create a new Account</string>
+    <string name="button_login">Login</string>
+    <string name="hint_enter_password">Enter a password</string>
+    <string name="hint_enter_username">Enter a username</string>
+    <string name="hint_wrong_user_data">Username or Password are wrong</string>
 </resources>

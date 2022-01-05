@@ -7,14 +7,16 @@ import kotlinx.parcelize.Parcelize
 import java.sql.Timestamp
 
 @Parcelize
-data class EventModel(var id: Long = 0,
-                      var name: String="",
-                      var description: String ="",
-                      var date: Timestamp,
-                      var organizer: User,
-                      var location: Location,
-                      var image: Uri = Uri.EMPTY,
-                      var costs: Float ):Parcelable
+data class EventModel(
+    var id: Long = 0,
+    var name: String = "",
+    var description: String = "",
+    var costs: Float= 0.0F,
+    var date: Timestamp = Timestamp(0),
+    var organizer: User = User(),
+    var location: Location = Location(""),
+    var image: Uri = Uri.EMPTY
+):Parcelable
 // evtl. category
 
 

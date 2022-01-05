@@ -3,10 +3,10 @@ package org.wit.localevents.models
 
 import timber.log.Timber.i
 
-var lastId = 0L
+var lastIdEvent = 0L
 
-internal fun getId(): Long {
-    return lastId++
+internal fun getIdEvent(): Long {
+    return lastIdEvent++
 }
 
 class EventMemStore : EventStore {
@@ -18,7 +18,7 @@ class EventMemStore : EventStore {
     }
 
     override fun create(event: EventModel) {
-        event.id = getId()
+        event.id = getIdEvent()
         events.add(event)
         logAll()
     }
