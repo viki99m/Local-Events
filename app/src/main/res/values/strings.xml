@@ -19,4 +19,5 @@
     <string name="menu_addEvent">Add</string>
     <string name="menu_cancelEvent">Cancel</string>
     <string name="hint_username_exist">the username already exists</string>
+    <string name="button_select_date">Select a date and time</string>
 </resources>

@@ -1,12 +1,13 @@
 package org.wit.localevents.activities
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.DatePicker
-import android.widget.NumberPicker
 import android.widget.TimePicker
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,32 +18,43 @@ import org.wit.localevents.databinding.ActivityEventBinding
 import org.wit.localevents.helpers.showImagePicker
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.EventModel
-import timber.log.Timber
-import timber.log.Timber.i
 
-class EventActivity : AppCompatActivity() {
+import timber.log.Timber.i
+import java.text.DecimalFormat
+import java.time.LocalDateTime
+import java.util.*
+
+class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     private lateinit var binding: ActivityEventBinding
     var event = EventModel()
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
+    var edit = false
+    var costs = 0
+    var dayofMonth= 0
+    var month = 0
+    var year= 0
+    var minute =0
+    var hour=0
+
+    var saveDayofMonth= 0
+    var saveMonth = 0
+    var saveYear= 0
+    var saveMinute =0
+    var saveHour=0
+
+    val format = DecimalFormat("00")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var edit = false
-        var costs = 0
-        var dayofMonth= 0
-        var month = 0
-        var year= 0
-        var minute =0
-        var hour=0
+
         binding = ActivityEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.toolbarAdd.title = "Local Events"
         val numberPicker= binding.eventCosts
-        val datePicker= binding.eventDate
-        val timePicker= binding.eventTime
 
         //setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
@@ -51,15 +63,9 @@ class EventActivity : AppCompatActivity() {
         numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
             costs= newVal
         }
-        datePicker.setOnDateChangedListener{ datePicker: DatePicker, i: Int, i1: Int, i2: Int ->
-            year = datePicker.year
-            month = datePicker.month
-            dayofMonth = datePicker.dayOfMonth
-        }
-        timePicker.setOnTimeChangedListener{ timePicker: TimePicker, i: Int, i1: Int ->
-            minute = timePicker.minute
-            hour=timePicker.hour
-        }
+        var showDate = binding.showDate
+
+        pickDate()
 
         if (intent.hasExtra("event_edit")) {
             edit = true
@@ -68,8 +74,9 @@ class EventActivity : AppCompatActivity() {
             binding.eventDescription.setText(event.description)
             numberPicker.value = event.costs
             binding.eventOrganizer.setText(event.organizer)
-            datePicker.updateDate(year,month,dayofMonth)
-            //binding.eventTime.setOnTimeChangedListener(binding.eventTime)
+            binding.showDate.setText("$year - $month - $dayofMonth,${format.format(hour)}:${format.format(minute)}")
+
+
             // Location
             binding.buttonAddEvent.setText(R.string.button_event_add)
             Picasso.get()
@@ -82,6 +89,7 @@ class EventActivity : AppCompatActivity() {
             event.organizer= binding.eventOrganizer.text.toString()
             event.description = binding.eventDescription.text.toString()
             event.costs= costs
+            event.date = LocalDateTime.of(saveYear,saveMonth,saveDayofMonth,saveHour,saveMinute)
 
             if (event.name.isEmpty()) {
                 Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)
@@ -131,5 +139,51 @@ class EventActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        saveDayofMonth= dayOfMonth
+        saveMonth= month +1
+        saveYear=year
+
+        getDateTimeCalandar()
+
+        TimePickerDialog(this,this,hour,minute,true).show()
+    }
+
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        saveHour= hourOfDay
+        saveMinute = minute
+
+        binding.showDate.setText("$saveYear - $saveMonth - $saveDayofMonth,${format.format(saveHour)} : ${format.format(saveMinute)}")
+
+    }
+    private fun getDateTimeCalandar(){
+        val cal = Calendar.getInstance()
+        dayofMonth = cal.get(Calendar.DAY_OF_MONTH)
+        month = cal.get(Calendar.MONTH)
+        year = cal.get(Calendar.YEAR)
+        hour = cal.get(Calendar.HOUR)
+        minute= cal.get(Calendar.MINUTE)
+
+
+    }
+    private fun pickDate(){
+       binding.buttonDate.setOnClickListener{
+           if (intent.hasExtra("event_edit")) {
+               year = event.date.year
+               dayofMonth= event.date.dayOfMonth
+               month = event.date.monthValue
+               hour= event.date.hour
+               minute= event.date.minute
+
+
+           }else{
+               getDateTimeCalandar()
+           }
+
+
+           DatePickerDialog(this,this,year,month,dayofMonth).show()
+       }
     }
 }
