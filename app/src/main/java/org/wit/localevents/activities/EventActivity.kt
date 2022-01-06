@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.DatePicker
+import android.widget.NumberPicker
+import android.widget.TimePicker
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
@@ -23,24 +26,49 @@ class EventActivity : AppCompatActivity() {
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         var edit = false
+        var costs = 0
+        var dayofMonth= 0
+        var month = 0
+        var year= 0
+        var minute =0
+        var hour=0
         binding = ActivityEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.toolbarAdd.title = "Local Events"
+        val numberPicker= binding.eventCosts
+        val datePicker= binding.eventDate
+        val timePicker= binding.eventTime
+
         //setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
-
+        numberPicker.minValue=0
+        numberPicker.maxValue=1000
+        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+            costs= newVal
+        }
+        datePicker.setOnDateChangedListener{ datePicker: DatePicker, i: Int, i1: Int, i2: Int ->
+            year = datePicker.year
+            month = datePicker.month
+            dayofMonth = datePicker.dayOfMonth
+        }
+        timePicker.setOnTimeChangedListener{ timePicker: TimePicker, i: Int, i1: Int ->
+            minute = timePicker.minute
+            hour=timePicker.hour
+        }
 
         if (intent.hasExtra("event_edit")) {
             edit = true
             event = intent.extras?.getParcelable("event_edit")!!
             binding.eventName.setText(event.name)
             binding.eventDescription.setText(event.description)
-          //  binding.eventCosts.se(event.costs)
+            numberPicker.value = event.costs
             binding.eventOrganizer.setText(event.organizer)
-            //binding.eventDate.setDate
+            datePicker.updateDate(year,month,dayofMonth)
             //binding.eventTime.setOnTimeChangedListener(binding.eventTime)
             // Location
             binding.buttonAddEvent.setText(R.string.button_event_add)
@@ -53,7 +81,7 @@ class EventActivity : AppCompatActivity() {
             event.name= binding.eventName.text.toString()
             event.organizer= binding.eventOrganizer.text.toString()
             event.description = binding.eventDescription.text.toString()
-           // event.costs= binding.eventCosts.text.toString()
+            event.costs= costs
 
             if (event.name.isEmpty()) {
                 Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)

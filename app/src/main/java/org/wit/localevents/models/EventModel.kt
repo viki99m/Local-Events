@@ -11,7 +11,7 @@ data class EventModel(
     var id: Long = 0,
     var name: String = "",
     var description: String = "",
-    var costs: Float= 0.0F,
+    var costs: Int= 0,
     var date: Timestamp = Timestamp(0),
     var organizer: String = "",
     var location: Location = Location(""),
