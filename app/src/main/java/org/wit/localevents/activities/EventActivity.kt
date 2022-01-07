@@ -80,7 +80,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             binding.eventOrganizer.setText(event.organizer)
             binding.showDate.setText("${event.date.year} - ${event.date.month} - ${event.date.dayOfMonth},${format.format(event.date.hour)}:${format.format(event.date.minute)}")
             location= event.location
-            binding.buttonAddEvent.setText(R.string.button_event_add)
+            binding.buttonAddEvent.setText(R.string.button_save_changes)
             Picasso.get()
                 .load(event.image)
                 .into(binding.eventImage)
@@ -96,9 +96,6 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
 
             if (event.name.isEmpty()) {
                 Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)
-                    .show()
-            }else if(event.date.year == 0){
-                Snackbar.make(it,R.string.hint_enter_date, Snackbar.LENGTH_LONG)
                     .show()
             }else if (event.organizer.isEmpty()){
                 Snackbar.make(it,R.string.hint_enter_organizer, Snackbar.LENGTH_LONG)

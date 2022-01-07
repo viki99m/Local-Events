@@ -24,4 +24,6 @@
     <string name="hint_enter_date">Enter a Date and a time for your Event</string>
     <string name="hint_enter_organizer">Enter a organizer</string>
     <string name="change_event_image">Change Event image</string>
+    <string name="button_show_location">Show Location</string>
+    <string name= "button_save_changes">Save Changes</string>
 </resources>

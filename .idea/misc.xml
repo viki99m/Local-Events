@@ -3,12 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/drawable-anydpi/ic_clock.xml" value="0.1015625" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/drawable/ic_launcher_background.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/activity_event.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/activity_event_list.xml" value="0.13858695652173914" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/card_event.xml" value="0.13858695652173914" />
+        <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/card_event.xml" value="0.22" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/layout/login_activity.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/menu/menu_event.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/vikto/AndroidStudioProjects/LocalEvents/app/src/main/res/menu/menu_main.xml" value="0.17552083333333332" />
