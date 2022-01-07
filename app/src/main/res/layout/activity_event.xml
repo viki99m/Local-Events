@@ -142,8 +142,7 @@ tools:context=".activities.EventActivity">
             <TextView
                 android:id="@+id/show_date"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+                android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/button_add_event"
                 android:layout_width="match_parent"
@@ -155,6 +154,9 @@ tools:context=".activities.EventActivity">
                 android:text="@string/button_event_add"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+
+
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

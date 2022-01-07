@@ -53,8 +53,6 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         binding = ActivityEventBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
