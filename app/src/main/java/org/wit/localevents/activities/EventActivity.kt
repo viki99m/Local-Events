@@ -98,7 +98,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             event.location= location
             event.date = LocalDateTime.of(saveYear,saveMonth,saveDayofMonth,saveHour,saveMinute)
 
-           if (event.name.isEmpty()) {
+            if (event.name.isEmpty()) {
                 Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)
                     .show()
             }else if (event.organizer.isEmpty()){
@@ -109,7 +109,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
                 Snackbar.make(it,R.string.hint_enter_date, Snackbar.LENGTH_LONG)
                     .show()
             }
-            //else {
+            else {
                 if (edit) {
                     app.events.update(event.copy())
                 } else {
@@ -117,7 +117,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
                 }
                 setResult(RESULT_OK)
                 finish()
-          //  }
+            }
 
         }
         binding.eventChooseImage.setOnClickListener {
