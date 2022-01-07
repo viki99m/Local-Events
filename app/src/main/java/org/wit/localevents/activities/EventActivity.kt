@@ -3,6 +3,7 @@ package org.wit.localevents.activities
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -41,8 +42,8 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
     var minute =0
     var hour=0
 
-    var saveDayofMonth= 0
-    var saveMonth = 0
+    var saveDayofMonth= 1
+    var saveMonth = 1
     var saveYear= 0
     var saveMinute =0
     var saveHour=0
@@ -67,7 +68,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
         numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
             costs= newVal
         }
-        var showDate = binding.showDate
+
 
 
 
@@ -81,9 +82,12 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             binding.showDate.setText("${event.date.year} - ${event.date.month} - ${event.date.dayOfMonth},${format.format(event.date.hour)}:${format.format(event.date.minute)}")
             location= event.location
             binding.buttonAddEvent.setText(R.string.button_save_changes)
-            Picasso.get()
-                .load(event.image)
-                .into(binding.eventImage)
+            if (event.image != Uri.EMPTY){
+                Picasso.get()
+                    .load(event.image)
+                    .into(binding.eventImage)
+            }
+
         }
 
         binding.buttonAddEvent.setOnClickListener() {
@@ -94,14 +98,18 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             event.location= location
             event.date = LocalDateTime.of(saveYear,saveMonth,saveDayofMonth,saveHour,saveMinute)
 
-            if (event.name.isEmpty()) {
+           if (event.name.isEmpty()) {
                 Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)
                     .show()
             }else if (event.organizer.isEmpty()){
                 Snackbar.make(it,R.string.hint_enter_organizer, Snackbar.LENGTH_LONG)
                     .show()
             }
-            else {
+            else if (event.date.year==0){
+                Snackbar.make(it,R.string.hint_enter_date, Snackbar.LENGTH_LONG)
+                    .show()
+            }
+            //else {
                 if (edit) {
                     app.events.update(event.copy())
                 } else {
@@ -109,7 +117,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
                 }
                 setResult(RESULT_OK)
                 finish()
-            }
+          //  }
 
         }
         binding.eventChooseImage.setOnClickListener {

@@ -11,7 +11,7 @@ data class EventModel(
     var name: String = "",
     var description: String = "",
     var costs: Int= 0,
-    var date: LocalDateTime= LocalDateTime.now(),
+    var date: LocalDateTime= LocalDateTime.of(0,1,1,1,1,1),
     var organizer: String = "",
     var location: Location = Location(),
     var image: Uri = Uri.EMPTY

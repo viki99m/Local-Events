@@ -152,9 +152,8 @@ tools:context=".activities.EventActivity">
                 android:background="@color/purple_3"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:stateListAnimator="@null"
                 android:text="@string/button_event_add"
-                android:textColor="#212121"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
