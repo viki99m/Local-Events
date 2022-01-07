@@ -97,7 +97,14 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             if (event.name.isEmpty()) {
                 Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)
                     .show()
-            } else {
+            }else if(event.date.year == 0){
+                Snackbar.make(it,R.string.hint_enter_date, Snackbar.LENGTH_LONG)
+                    .show()
+            }else if (event.organizer.isEmpty()){
+                Snackbar.make(it,R.string.hint_enter_organizer, Snackbar.LENGTH_LONG)
+                    .show()
+            }
+            else {
                 if (edit) {
                     app.events.update(event.copy())
                 } else {
