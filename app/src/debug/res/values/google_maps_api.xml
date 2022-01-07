@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=42:43:0C:CB:CD:42:3B:37:8E:B0:72:A7:B5:91:B3:FB:B3:2B:80:5F%3Borg.wit.localevents.activities
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    org.wit.localevents.activities
+
+    SHA-1 certificate fingerprint:
+    42:43:0C:CB:CD:42:3B:37:8E:B0:72:A7:B5:91:B3:FB:B3:2B:80:5F
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">${MAPS_API_KEY}</string>
+</resources>

@@ -1,6 +1,8 @@
 package org.wit.localevents.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.wit.localevents.R
@@ -19,7 +21,7 @@ class LoginActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("Login Activity starts")
+        i("Login Activity starts")
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         app = application as MainApp
@@ -65,9 +67,11 @@ class LoginActivity : AppCompatActivity(){
                 }
             }
             setResult(RESULT_OK)
+            val launcherIntent = Intent(this, EventListActivity::class.java)
+            startActivityForResult(launcherIntent,0)
+
 
         }
-
     }
 
 }

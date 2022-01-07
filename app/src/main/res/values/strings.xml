@@ -7,5 +7,23 @@
     <string name="hint_enter_password">Enter a password</string>
     <string name="hint_enter_username">Enter a username</string>
     <string name="hint_wrong_user_data">username or password are wrong</string>
-    <string name="hint_username_exist">username already exists </string>
+    <string name="hint_event_name">Enter a event name</string>
+    <string name="hint_event_costs">Enter entrance costs</string>
+    <string name="hint_event_description">Enter a description </string>
+    <string name="hint_event_date">Select a date and time</string>
+    <string name="button_event_location">Select a location</string>
+    <string name="hint_event_organizer">Enter a organizer</string>
+    <string name="button_event_image">Add a Image</string>
+    <string name="button_event_add"> create new event</string>
+    <string name="hint_enter_event_name">Enter a Name for your Event</string>
+    <string name="menu_addEvent">Add</string>
+    <string name="menu_cancelEvent">Cancel</string>
+    <string name="hint_username_exist">the username already exists</string>
+    <string name="button_select_date">Select a date and time</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="hint_enter_date">Enter a Date and a time for your Event</string>
+    <string name="hint_enter_organizer">Enter a organizer</string>
+    <string name="change_event_image">Change Event image</string>
+    <string name="button_show_location">Show Location</string>
+    <string name= "button_save_changes">Save Changes</string>
 </resources>
