@@ -54,12 +54,10 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEventBinding.inflate(layoutInflater)
-
+        val numberPicker= binding.eventCosts
         setContentView(binding.root)
         binding.toolbarAdd.title = "Local Events"
-        val numberPicker= binding.eventCosts
-
-        //setSupportActionBar(binding.toolbarAdd)
+        setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
         numberPicker.minValue=0
         numberPicker.maxValue=1000

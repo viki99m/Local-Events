@@ -25,6 +25,9 @@ class LoginActivity : AppCompatActivity(){
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         app = application as MainApp
+        binding.toolbarLogin.title = title
+        setSupportActionBar(binding.toolbarLogin)
+
 
         binding.btnSignin.setOnClickListener() {
             user.username = binding.username.text.toString()
@@ -35,15 +38,14 @@ class LoginActivity : AppCompatActivity(){
             }else if(user.password.isEmpty()) {
                 Snackbar.make(it, R.string.hint_enter_password,Snackbar.LENGTH_LONG).show()
             }else {
-                //if (edit) {
-                //    app.events.update(event.copy())
-                //} else {
-                    var check =app.users.create(user.copy())
+
+                    var check = app.users.create(user.copy())
                     if (!check){
                         Snackbar.make(it, R.string.hint_username_exist,Snackbar.LENGTH_LONG).show()
+                    }else{
+                        Snackbar.make(it, R.string.hint_new_user,Snackbar.LENGTH_LONG).show()
                     }
 
-                //}
             }
             setResult(RESULT_OK)
 
@@ -63,12 +65,13 @@ class LoginActivity : AppCompatActivity(){
                         .show()
                 }else{
                     i("Login successful")
-                    // to next activity
+                    app.currentUser = user.copy()
+                    setResult(RESULT_OK)
+                    val launcherIntent = Intent(this, EventListActivity::class.java)
+                    startActivityForResult(launcherIntent,0)
                 }
             }
-            setResult(RESULT_OK)
-            val launcherIntent = Intent(this, EventListActivity::class.java)
-            startActivityForResult(launcherIntent,0)
+
 
 
         }

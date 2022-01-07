@@ -40,6 +40,14 @@ class EventMemStore : EventStore {
     override fun delete(event: EventModel) {
         events.remove(event)
     }
+
+    override fun findAllwithUser(user: User): List<EventModel> {
+        val eventswithUser = events
+        // different between users
+
+        return eventswithUser
+    }
+
     private fun logAll() {
         events.forEach { i("$it") }
     }

@@ -18,7 +18,7 @@ tools:context=".activities.EventActivity">
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/purple_1"
         android:fitsSystemWindows="true"
         app:elevation="0dip"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -27,7 +27,7 @@ tools:context=".activities.EventActivity">
             android:id="@+id/toolbarAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleTextColor="@color/black" />
+            app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView

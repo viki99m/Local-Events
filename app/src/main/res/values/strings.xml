@@ -26,4 +26,8 @@
     <string name="change_event_image">Change Event image</string>
     <string name="button_show_location">Show Location</string>
     <string name= "button_save_changes">Save Changes</string>
+    <string name="hint_new_user">Thank you for Signin in Local Events</string>
+    <string name="menu_event_overview">Events Overview</string>
+    <string name="menu_my_events">My Events</string>
+    <string name="menu_delete_event">Delete</string>
 </resources>
