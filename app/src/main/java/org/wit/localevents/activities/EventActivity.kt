@@ -29,6 +29,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
     var event = EventModel()
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     var edit = false
     var costs = 0
@@ -52,6 +53,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
 
 
         binding = ActivityEventBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
         binding.toolbarAdd.title = "Local Events"
         val numberPicker= binding.eventCosts
@@ -65,7 +67,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
         }
         var showDate = binding.showDate
 
-        pickDate()
+
 
         if (intent.hasExtra("event_edit")) {
             edit = true
@@ -108,7 +110,13 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             i("Select image")
             showImagePicker(imageIntentLauncher)
         }
+        binding.eventChooseLocation.setOnClickListener {
+            val launcherIntent = Intent(this, MapActivity::class.java)
+            mapIntentLauncher.launch(launcherIntent)
+        }
         registerImagePickerCallback()
+        registerMapCallback()
+        pickDate()
     }
 
    override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -185,5 +193,10 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
 
            DatePickerDialog(this,this,year,month,dayofMonth).show()
        }
+    }
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { i("Map Loaded") }
     }
 }
