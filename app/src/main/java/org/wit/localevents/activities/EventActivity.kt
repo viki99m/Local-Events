@@ -33,8 +33,8 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     var location = Location(49.01992541291023, 12.098539934552333, 15f)
-
     var edit = false
+
     var costs = 0
     var dayofMonth= 0
     var month = 0
@@ -68,8 +68,6 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
         numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
             costs= newVal
         }
-
-
 
 
         if (intent.hasExtra("event_edit")) {
