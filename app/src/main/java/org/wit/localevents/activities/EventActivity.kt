@@ -110,9 +110,10 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
                 } else {
                     app.events.create(event.copy())
                 }
+                setResult(RESULT_OK)
+                finish()
             }
-            setResult(RESULT_OK)
-            finish()
+
         }
         binding.eventChooseImage.setOnClickListener {
             i("Select image")

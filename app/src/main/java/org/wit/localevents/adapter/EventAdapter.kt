@@ -4,6 +4,7 @@ package org.wit.localevents.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.localevents.databinding.CardEventBinding
 import org.wit.localevents.models.EventModel
 
@@ -34,6 +35,7 @@ class EventAdapter constructor(private var events: List<EventModel>,
         fun bind(event: EventModel, listener: EventListener) {
             binding.eventName.text = event.name
             binding.eventDescription.text = event.description
+            Picasso.get().load(event.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onEventClick(event) }
         }
     }

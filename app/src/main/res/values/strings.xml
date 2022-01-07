@@ -23,4 +23,5 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="hint_enter_date">Enter a Date and a time for your Event</string>
     <string name="hint_enter_organizer">Enter a organizer</string>
+    <string name="change_event_image">Change Event image</string>
 </resources>
