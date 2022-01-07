@@ -1,10 +1,8 @@
 package org.wit.localevents.models
 
-import android.location.Location
 import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.sql.Timestamp
 import java.time.LocalDateTime
 
 @Parcelize
@@ -15,9 +13,13 @@ data class EventModel(
     var costs: Int= 0,
     var date: LocalDateTime= LocalDateTime.now(),
     var organizer: String = "",
-    var location: Location = Location(""),
+    var location: Location = Location(),
     var image: Uri = Uri.EMPTY
 ):Parcelable
 // evtl. category
 
+@Parcelize
+data class Location(var lat: Double = 0.0,
+                    var lng: Double = 0.0,
+                    var zoom: Float = 0f) : Parcelable
 

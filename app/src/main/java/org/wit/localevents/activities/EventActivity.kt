@@ -18,6 +18,7 @@ import org.wit.localevents.databinding.ActivityEventBinding
 import org.wit.localevents.helpers.showImagePicker
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.EventModel
+import org.wit.localevents.models.Location
 
 import timber.log.Timber.i
 import java.text.DecimalFormat
@@ -30,6 +31,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    var location = Location(49.01992541291023, 12.098539934552333, 15f)
 
     var edit = false
     var costs = 0
@@ -76,10 +78,8 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             binding.eventDescription.setText(event.description)
             numberPicker.value = event.costs
             binding.eventOrganizer.setText(event.organizer)
-            binding.showDate.setText("$year - $month - $dayofMonth,${format.format(hour)}:${format.format(minute)}")
-
-
-            // Location
+            binding.showDate.setText("${event.date.year} - ${event.date.month} - ${event.date.dayOfMonth},${format.format(event.date.hour)}:${format.format(event.date.minute)}")
+            location= event.location
             binding.buttonAddEvent.setText(R.string.button_event_add)
             Picasso.get()
                 .load(event.image)
@@ -91,6 +91,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             event.organizer= binding.eventOrganizer.text.toString()
             event.description = binding.eventDescription.text.toString()
             event.costs= costs
+            event.location= location
             event.date = LocalDateTime.of(saveYear,saveMonth,saveDayofMonth,saveHour,saveMinute)
 
             if (event.name.isEmpty()) {
@@ -112,8 +113,10 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
         }
         binding.eventChooseLocation.setOnClickListener {
             val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
+
         registerImagePickerCallback()
         registerMapCallback()
         pickDate()
@@ -151,7 +154,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         saveDayofMonth= dayOfMonth
-        saveMonth= month +1
+        saveMonth= month+1
         saveYear=year
 
         getDateTimeCalandar()
@@ -194,9 +197,21 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
            DatePickerDialog(this,this,year,month,dayofMonth).show()
        }
     }
+
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { i("Map Loaded") }
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            location = result.data!!.extras?.getParcelable("location")!!
+                            i("Location == $location")
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 }
