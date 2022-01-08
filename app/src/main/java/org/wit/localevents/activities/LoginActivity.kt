@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity(){
         setContentView(binding.root)
         app = application as MainApp
         binding.toolbarLogin.title = title
-        setSupportActionBar(binding.toolbarLogin)
+        //setSupportActionBar(binding.toolbarLogin)
 
 
         binding.btnSignin.setOnClickListener() {
@@ -69,8 +69,11 @@ class LoginActivity : AppCompatActivity(){
                     i("Login successful")
                     app.currentUser = user.copy()
                     setResult(RESULT_OK)
-                    val launcherIntent= Intent(this,EventListActivity::class.java)
-                    launcherIntent.putExtra("event_overview",true)
+                   // val launcherIntent= Intent(this,EventListActivity::class.java)
+                   // launcherIntent.putExtra("event_overview",true)
+                   // startActivity(launcherIntent)
+                    val launcherIntent= Intent(this,MenuActivity::class.java)
+                    //launcherIntent.putExtra("event_overview",true)
                     startActivity(launcherIntent)
                 }
             }
