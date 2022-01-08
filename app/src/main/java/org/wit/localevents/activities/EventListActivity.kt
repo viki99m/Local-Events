@@ -23,7 +23,7 @@ class EventListActivity : AppCompatActivity(), EventListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityEventListBinding
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
-    private var mymenu: Int = R.menu.menu_main
+    private var mymenu: Int = R.menu.menu_my_events
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +55,11 @@ class EventListActivity : AppCompatActivity(), EventListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            /* R.id.item_add -> {
+             R.id.item_add -> {
                  val launcherIntent = Intent(this, EventActivity::class.java)
                  refreshIntentLauncher.launch(launcherIntent)
              }
-             R.id.item_map -> {
+            /* R.id.item_map -> {
                  val launcherIntent = Intent(this, EventMapsActivity::class.java)
                  mapIntentLauncher.launch(launcherIntent)
              }*/

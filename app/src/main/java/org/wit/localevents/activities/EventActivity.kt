@@ -137,6 +137,12 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_cancel -> { finish() }
+            R.id.item_delete -> {
+                if (event != null) {
+                    app.events.delete(event)
+                    finish()
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }

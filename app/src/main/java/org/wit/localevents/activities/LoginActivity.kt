@@ -3,6 +3,7 @@ package org.wit.localevents.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.wit.localevents.R
@@ -15,6 +16,7 @@ import timber.log.Timber.i
 
 class LoginActivity : AppCompatActivity(){
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
     lateinit var app: MainApp
     var user = User()
 
@@ -67,8 +69,9 @@ class LoginActivity : AppCompatActivity(){
                     i("Login successful")
                     app.currentUser = user.copy()
                     setResult(RESULT_OK)
-                    val launcherIntent = Intent(this, EventListActivity::class.java)
-                    startActivityForResult(launcherIntent,0)
+                    val launcherIntent= Intent(this,EventListActivity::class.java)
+                    launcherIntent.putExtra("event_overview",true)
+                    startActivity(launcherIntent)
                 }
             }
 
