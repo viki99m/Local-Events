@@ -8,13 +8,5 @@
          android:icon="@android:drawable/ic_menu_add"
          android:title="@string/menu_addEvent"
          app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/item_overview"
-        android:title="@string/menu_event_overview"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/item_myEvents"
-        android:title="@string/menu_my_events"
-        app:showAsAction="never"/>
 
 </menu>

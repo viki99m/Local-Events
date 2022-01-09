@@ -2,28 +2,34 @@ package org.wit.localevents.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Xml
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toolbar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.localevents.R
-import org.wit.localevents.adapter.EventAdapter
 import org.wit.localevents.adapter.EventListener
 import org.wit.localevents.databinding.ActivityEventListBinding
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.EventModel
 import java.util.*
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
+import org.wit.localevents.adapter.EventAdapter
+import timber.log.Timber.i
 
 
 class EventListActivity : AppCompatActivity(), EventListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityEventListBinding
-    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     private var mymenu: Int = R.menu.menu_my_events
+    lateinit var toogle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,22 +37,55 @@ class EventListActivity : AppCompatActivity(), EventListener {
         setContentView(binding.root)
         app = application as MainApp
 
+
+        setSupportActionBar(findViewById(R.id.topAppBar))
+        var toolbar = findViewById<MaterialToolbar>(R.id.topAppBar)
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        if(intent.hasExtra("event_overview" )){
-            binding.toolbar.title = "Local Event"
-            mymenu= R.menu.menu_main
+
+        if (intent.hasExtra("event_overview")) {
+           toolbar.title = "Home"
+            mymenu = R.menu.menu_main
             loadEvents()
         }
-        if(intent.hasExtra("my_events" )){
-            binding.toolbar.title = "My Events"
+        if (intent.hasExtra("my_events")) {
+            toolbar.title = "My Events"
             mymenu = R.menu.menu_my_events
             loadUserEvent()
         }
-        setSupportActionBar(binding.toolbar)
+
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        toogle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toogle)
+        toogle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.item_home -> {
+                    val launcherIntent = Intent(this, EventListActivity::class.java)
+                    launcherIntent.putExtra("event_overview", true)
+                    startActivity(launcherIntent)
+                }
+                R.id.item_myEvents -> {
+                    val launcherIntent = Intent(this, EventListActivity::class.java)
+                    launcherIntent.putExtra("my_events", true)
+                    startActivity(launcherIntent)
+                }
+
+            }
+            true
+        }
 
         registerRefreshCallback()
+
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(mymenu, menu)
 
@@ -54,26 +93,17 @@ class EventListActivity : AppCompatActivity(), EventListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-             R.id.item_add -> {
-                 val launcherIntent = Intent(this, EventActivity::class.java)
-                 refreshIntentLauncher.launch(launcherIntent)
-             }
-            /* R.id.item_map -> {
-                 val launcherIntent = Intent(this, EventMapsActivity::class.java)
-                 mapIntentLauncher.launch(launcherIntent)
-             }*/
-            R.id.item_overview ->{
-                val launcherIntent= Intent(this,EventListActivity::class.java)
-                launcherIntent.putExtra("event_overview",true)
-                refreshIntentLauncher.launch(launcherIntent)
-            }
-            R.id.item_myEvents->{
-                val launcherIntent= Intent(this,EventListActivity::class.java)
-                launcherIntent.putExtra("my_events",true)
+
+        if (toogle.onOptionsItemSelected(item)) {
+            return true
+        }
+        when(item.itemId){
+            R.id.item_add -> {
+                val launcherIntent = Intent(this, EventActivity::class.java)
                 refreshIntentLauncher.launch(launcherIntent)
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -86,7 +116,8 @@ class EventListActivity : AppCompatActivity(), EventListener {
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { loadEvents() }
+            {
+                loadEvents() }
     }
 
    /*private fun registerMapCallback() {
@@ -99,6 +130,7 @@ class EventListActivity : AppCompatActivity(), EventListener {
 
     private fun loadEvents() {
         showEvents(app.events.findAll())
+
     }
     private fun loadUserEvent(){
         showEvents(app.events.findAllwithUser(app.currentUser))
@@ -107,5 +139,6 @@ class EventListActivity : AppCompatActivity(), EventListener {
     fun showEvents (events: List<EventModel>) {
         binding.recyclerView.adapter = EventAdapter(events, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
+        i("${binding.recyclerView.adapter}")
     }
 }
