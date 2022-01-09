@@ -28,10 +28,10 @@ class LoginActivity : AppCompatActivity(){
         setContentView(binding.root)
         app = application as MainApp
         binding.toolbarLogin.title = title
-        //setSupportActionBar(binding.toolbarLogin)
+        setSupportActionBar(binding.toolbarLogin)
 
 
-        binding.btnSignin.setOnClickListener() {
+        binding.btnSignin.setOnClickListener {
             user.username = binding.username.text.toString()
             user.password= binding.userPassword.text.toString()
             if (user.username.isEmpty()) {
@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity(){
             setResult(RESULT_OK)
 
         }
-        binding.btnLogin.setOnClickListener() {
+        binding.btnLogin.setOnClickListener {
             user.username = binding.username.text.toString()
             user.password= binding.userPassword.text.toString()
             if (user.username.isEmpty()) {

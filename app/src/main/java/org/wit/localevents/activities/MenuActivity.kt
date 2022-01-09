@@ -1,5 +1,6 @@
 package org.wit.localevents.activities
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -12,16 +13,16 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import org.wit.localevents.R
-import org.wit.localevents.databinding.ActivityLoginBinding
-import org.wit.localevents.databinding.ActivityMenuBinding
+
 
 class MenuActivity: AppCompatActivity() {
 
     lateinit var toogle: ActionBarDrawerToggle
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+
+        setSupportActionBar(findViewById(R.id.topAppBar))
 
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
