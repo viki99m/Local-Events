@@ -67,6 +67,11 @@ class EventListActivity : AppCompatActivity(), EventListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
+                R.id.item_profile-> {
+                    val launcherIntent = Intent(this, ProfileActivity::class.java)
+                    startActivity(launcherIntent)
+                    i("klick")
+                }
                 R.id.item_home -> {
                     val launcherIntent = Intent(this, EventListActivity::class.java)
                     launcherIntent.putExtra("event_overview", true)
@@ -77,7 +82,6 @@ class EventListActivity : AppCompatActivity(), EventListener {
                     launcherIntent.putExtra("my_events", true)
                     startActivity(launcherIntent)
                 }
-
             }
             true
         }

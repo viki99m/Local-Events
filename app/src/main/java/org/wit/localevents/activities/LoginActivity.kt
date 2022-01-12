@@ -40,11 +40,11 @@ class LoginActivity : AppCompatActivity(){
             }else if(user.password.isEmpty()) {
                 Snackbar.make(it, R.string.hint_enter_password,Snackbar.LENGTH_LONG).show()
             }else {
-
-                    var check = app.users.create(user.copy())
-                    if (!check){
+                    var check = app.users.usernameExists(user.copy())
+                    if (check){
                         Snackbar.make(it, R.string.hint_username_exist,Snackbar.LENGTH_LONG).show()
                     }else{
+                        app.users.create(user.copy())
                         Snackbar.make(it, R.string.hint_new_user,Snackbar.LENGTH_LONG).show()
                     }
 
@@ -69,11 +69,8 @@ class LoginActivity : AppCompatActivity(){
                     i("Login successful")
                     app.currentUser = user.copy()
                     setResult(RESULT_OK)
-                   // val launcherIntent= Intent(this,EventListActivity::class.java)
-                   // launcherIntent.putExtra("event_overview",true)
-                   // startActivity(launcherIntent)
-                    val launcherIntent= Intent(this,MenuActivity::class.java)
-                    //launcherIntent.putExtra("event_overview",true)
+                    val launcherIntent= Intent(this,EventListActivity::class.java)
+                    launcherIntent.putExtra("event_overview",true)
                     startActivity(launcherIntent)
                 }
             }

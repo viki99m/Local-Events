@@ -33,19 +33,18 @@ class UserMemStore : UserStore {
             }
         }
 
-        override fun updateUsername(user: User) {
+        override fun update(user: User): Boolean {
             var founduser: User? = users.find { p -> p.id == user.id }
             if (founduser != null) {
                 founduser.username = user.username
+                founduser.password= user.password
+                return true
+            }else{
+                return false
             }
+
         }
 
-    override fun updatePassword(user: User) {
-        var founduser: User? = users.find{p -> p.id ==user.id}
-        if(founduser!=null){
-            founduser.password= user.password
-        }
-    }
 
         override fun delete(user: User) {
             users.remove(user)
@@ -62,5 +61,11 @@ class UserMemStore : UserStore {
             return false
         }
     }
+
+    override fun usernameExists(user: User): Boolean {
+        var founduser: User ?= users.find{p -> p.username == user.username}
+        return founduser != null
+    }
+
 
 }
