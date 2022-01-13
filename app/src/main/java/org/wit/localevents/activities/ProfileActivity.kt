@@ -27,10 +27,7 @@ class ProfileActivity : AppCompatActivity() {
             binding = ActivityProfileBinding.inflate(layoutInflater)
             setContentView(binding.root)
             setSupportActionBar(findViewById(R.id.toolbarProfile))
-
-
             app = application as MainApp
-
 
             val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
             val navView: NavigationView = findViewById(R.id.nav_view)
@@ -90,6 +87,8 @@ class ProfileActivity : AppCompatActivity() {
 
                     }else {
                         app.users.update(user.copy())
+                        app.currentUser.username = user.username
+                        app.currentUser.password = user.password
                         binding.buttonEditUser.setText(R.string.button_edit_user)
                         setButtontoChangeUserdata()
 
@@ -115,17 +114,12 @@ class ProfileActivity : AppCompatActivity() {
             binding.editUsername.setText(app.currentUser.username)
             binding.editPassword.setText(app.currentUser.password)
 
-            //binding.editUsername.inputType = InputType.TYPE_NULL
-            //binding.editPassword.inputType = InputType.TYPE_NULL
-
             binding.editUsername.isClickable= false
             binding.editPassword.isClickable= false
 
-            binding.editUsername.isCursorVisible=false
-            binding.editPassword.isCursorVisible=false
 
-            binding.editUsername.isFocusable=false
-            binding.editPassword.isFocusable=false
+            binding.editUsername.isFocusable= false
+            binding.editPassword.isFocusable= false
 
             return true
         }
@@ -133,17 +127,12 @@ class ProfileActivity : AppCompatActivity() {
             kindofButton=1
 
             binding.buttonEditUser.setText(R.string.button_save_changes)
-            binding.editUsername.inputType = InputType.TYPE_TEXT_VARIATION_NORMAL
-            binding.editPassword.inputType = InputType.TYPE_TEXT_VARIATION_NORMAL
 
             binding.editUsername.isClickable= true
             binding.editPassword.isClickable= true
 
-            binding.editUsername.isCursorVisible=true
-            binding.editPassword.isCursorVisible=true
-
             binding.editUsername.isFocusable= true
-            binding.editPassword.isFocusable=true
+            binding.editPassword.isFocusable= true
 
             binding.editUsername.setTextIsSelectable(true)
             binding.editPassword.setTextIsSelectable(true)
