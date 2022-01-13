@@ -17,7 +17,6 @@ import timber.log.Timber.i
 
 class LoginActivity : AppCompatActivity(){
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
     lateinit var app: MainApp
     var user = User()
 
@@ -33,8 +32,8 @@ class LoginActivity : AppCompatActivity(){
 
 
         binding.btnSignin.setOnClickListener {
-            user.username = binding.username.text.toString()
-            user.password= binding.userPassword.text.toString()
+            user.username = binding.username.editText?.text.toString()
+            user.password= binding.userPassword.editText?.text.toString()
             if (user.username.isEmpty()) {
                 Snackbar.make(it, R.string.hint_enter_username, Snackbar.LENGTH_LONG)
                     .show()
@@ -54,8 +53,8 @@ class LoginActivity : AppCompatActivity(){
 
         }
         binding.btnLogin.setOnClickListener {
-            user.username = binding.username.text.toString()
-            user.password= binding.userPassword.text.toString()
+            user.username = binding.username.editText?.text.toString()
+            user.password= binding.userPassword.editText?.text.toString()
             if (user.username.isEmpty()) {
                 Snackbar.make(it, R.string.hint_enter_username, Snackbar.LENGTH_LONG)
                     .show()
