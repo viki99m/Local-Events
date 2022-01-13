@@ -8,7 +8,7 @@ import timber.log.Timber
 
 
 
-var lastIdUser = 0L
+var lastIdUser = 1L
 
 internal fun getIdUser(): Long {
     return lastIdUser++

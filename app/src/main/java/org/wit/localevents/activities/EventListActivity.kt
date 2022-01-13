@@ -82,6 +82,14 @@ class EventListActivity : AppCompatActivity(), EventListener {
                     launcherIntent.putExtra("my_events", true)
                     startActivity(launcherIntent)
                 }
+                R.id.item_logout -> {
+                   app.currentUser.id= 0
+                    app.currentUser.username=""
+                    app.currentUser.password=""
+                    app.currentUser.darkmodeOn=false
+                    val launcherIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(launcherIntent)
+                }
             }
             true
         }
