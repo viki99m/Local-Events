@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.snackbar.Snackbar
 import org.wit.localevents.R
 import org.wit.localevents.databinding.ActivityLoginBinding
@@ -68,6 +69,9 @@ class LoginActivity : AppCompatActivity(){
                 }else{
                     i("Login successful")
                     app.currentUser = user.copy()
+                    if(app.currentUser.darkmodeOn){
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    }
                     setResult(RESULT_OK)
                     val launcherIntent= Intent(this,EventListActivity::class.java)
                     launcherIntent.putExtra("event_overview",true)

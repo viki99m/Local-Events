@@ -1,11 +1,13 @@
 package org.wit.localevents.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -45,9 +47,12 @@ class ProfileActivity : AppCompatActivity() {
 
             binding.switchDarkmode.setOnClickListener {
                 if(binding.switchDarkmode.isChecked){
-                    i("is on")
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    app.currentUser.darkmodeOn = true
+
                 }else{
-                    i("is off")
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    app.currentUser.darkmodeOn = false
                 }
             }
 
@@ -75,8 +80,8 @@ class ProfileActivity : AppCompatActivity() {
             binding.buttonEditUser.setOnClickListener{
                 if(kindofButton==1){
                     var user = app.currentUser
-                    user.username= binding.editUsername.text.toString()
-                    user.password= binding.editPassword.text.toString()
+                    user.username= binding.editUsername.editText?.text.toString()
+                    user.password= binding.editPassword.editText?.text.toString()
                     if (user.username.isEmpty()) {
                         Snackbar.make(it, R.string.hint_enter_username, Snackbar.LENGTH_LONG)
                             .show()
@@ -111,15 +116,10 @@ class ProfileActivity : AppCompatActivity() {
         private fun setButtontoChangeUserdata(): Boolean{
             kindofButton=0
             binding.buttonEditUser.setText(R.string.button_edit_user)
-            binding.editUsername.setText(app.currentUser.username)
-            binding.editPassword.setText(app.currentUser.password)
-
-            binding.editUsername.isClickable= false
-            binding.editPassword.isClickable= false
-
-
-            binding.editUsername.isFocusable= false
-            binding.editPassword.isFocusable= false
+            binding.editUsername.editText?.setText(app.currentUser.username)
+            binding.editPassword.editText?.setText(app.currentUser.password)
+            binding.editUsername.isEnabled= false
+            binding.editPassword.isEnabled= false
 
             return true
         }
@@ -127,15 +127,8 @@ class ProfileActivity : AppCompatActivity() {
             kindofButton=1
 
             binding.buttonEditUser.setText(R.string.button_save_changes)
-
-            binding.editUsername.isClickable= true
-            binding.editPassword.isClickable= true
-
-            binding.editUsername.isFocusable= true
-            binding.editPassword.isFocusable= true
-
-            binding.editUsername.setTextIsSelectable(true)
-            binding.editPassword.setTextIsSelectable(true)
+            binding.editUsername.isEnabled= true
+            binding.editPassword.isEnabled= true
 
         return true
         }

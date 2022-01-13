@@ -52,7 +52,7 @@ tools:context=".activities.EventActivity">
                 android:maxLength="30"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/colorForeground"
                 android:textSize="14sp" />
 
             <EditText
@@ -66,7 +66,7 @@ tools:context=".activities.EventActivity">
                 android:maxLength="100"
                 android:maxLines="2"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/colorForeground"
                 android:textSize="14sp" />
 
             <EditText
@@ -80,7 +80,7 @@ tools:context=".activities.EventActivity">
                 android:maxLength="25"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/colorForeground"
                 android:textSize="14sp" />
 
             <NumberPicker
@@ -142,7 +142,9 @@ tools:context=".activities.EventActivity">
             <TextView
                 android:id="@+id/show_date"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/colorForeground" />
+
             <Button
                 android:id="@+id/button_add_event"
                 android:layout_width="match_parent"
@@ -154,7 +156,6 @@ tools:context=".activities.EventActivity">
                 android:text="@string/button_event_add"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
-
 
 
         </LinearLayout>

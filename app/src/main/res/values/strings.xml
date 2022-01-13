@@ -37,8 +37,8 @@
     <string name="menu_my_local_events">My Local Events</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="text_username">your username</string>
-    <string name="text_password">your password</string>
+    <string name="text_username">Username</string>
+    <string name="text_password">Password</string>
     <string name="text_settings">Settings</string>
     <string name="text_darkmode">Dark Mode</string>
     <string name="button_edit_user">Change your Userdata</string>

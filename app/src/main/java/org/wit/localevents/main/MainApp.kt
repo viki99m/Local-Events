@@ -3,6 +3,7 @@ package org.wit.localevents.main
 
 import android.os.Bundle
 import android.app.Application
+import android.content.SharedPreferences
 import org.wit.localevents.models.EventMemStore
 import org.wit.localevents.models.User
 import org.wit.localevents.models.UserMemStore
@@ -15,6 +16,7 @@ class MainApp : Application() {
     val events = EventMemStore()
     val users = UserMemStore()
     var currentUser = User()
+
 
     override fun onCreate() {
         super.onCreate()

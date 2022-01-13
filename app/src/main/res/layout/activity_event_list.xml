@@ -27,7 +27,7 @@
                 app:menu="@menu/menu_main"
                 app:navigationIcon="@drawable/ic_home"
                 app:title="@string/menu_home"
-                />
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

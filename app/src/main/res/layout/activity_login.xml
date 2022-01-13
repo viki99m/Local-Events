@@ -47,6 +47,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="Welcome to Local Events"
+                    android:textColor="?android:attr/colorForeground"
                     android:textSize="30dp"
                     android:textStyle="bold" />
 
@@ -61,7 +62,7 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/black"
+                    android:textColor="?android:attr/colorForeground"
                     android:textSize="14sp" />
 
                 <EditText
@@ -70,14 +71,14 @@
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
-                    android:hint="@string/hint_login_password"
                     android:ems="10"
+                    android:hint="@string/hint_login_password"
+                    android:inputType="textPassword"
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:inputType="textPassword"
-                    android:textSize="14sp"/>
+                    android:textColor="?android:attr/colorForeground"
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/btn_signin"
