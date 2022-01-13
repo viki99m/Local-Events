@@ -143,6 +143,9 @@ tools:context=".activities.EventActivity">
                 android:id="@+id/show_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 android:textColor="?android:attr/colorForeground" />
 
             <Button

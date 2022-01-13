@@ -73,7 +73,12 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             binding.eventDescription.setText(event.description)
             numberPicker.value = event.costs
             binding.eventOrganizer.setText(event.organizer)
-            binding.showDate.text = "${event.date.year} - ${event.date.month} - ${event.date.dayOfMonth},${format.format(event.date.hour)}:${format.format(event.date.minute)}"
+            binding.showDate.text = "${event.date.year} - ${event.date.month} - ${event.date.dayOfMonth}, ${format.format(event.date.hour)}:${format.format(event.date.minute)}"
+            saveYear= event.date.year
+            saveMonth= event.date.monthValue
+            saveDayofMonth= event.date.dayOfMonth
+            saveHour=event.date.hour
+            saveMinute=event.date.minute
             location= event.location
             binding.buttonAddEvent.setText(R.string.button_save_changes)
             if (event.image != Uri.EMPTY){
@@ -91,6 +96,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             event.costs= costs
             event.location= location
             event.date = LocalDateTime.of(saveYear,saveMonth,saveDayofMonth,saveHour,saveMinute)
+
 
             if (event.name.isEmpty()) {
                 Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)
@@ -179,7 +185,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
         saveHour= hourOfDay
         saveMinute = minute
 
-        binding.showDate.text = "$saveYear - $saveMonth - $saveDayofMonth,${format.format(saveHour)} : ${format.format(saveMinute)}"
+        binding.showDate.text = "$saveYear - $saveMonth - $saveDayofMonth, ${format.format(saveHour)} : ${format.format(saveMinute)}"
 
     }
     private fun getDateTimeCalandar(){
