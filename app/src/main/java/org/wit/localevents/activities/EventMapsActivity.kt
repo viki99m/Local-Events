@@ -1,11 +1,11 @@
 package org.wit.localevents.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,11 +18,10 @@ import org.wit.localevents.R
 import org.wit.localevents.databinding.ActivityEventMapsBinding
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.EventModel
-import timber.log.Timber
 import java.text.DecimalFormat
 
 
-class EventMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
+class EventMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
     private lateinit var binding: ActivityEventMapsBinding
     lateinit var map: GoogleMap
     lateinit var app: MainApp
@@ -34,7 +33,7 @@ class EventMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
         app = application as MainApp
         binding = ActivityEventMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //binding.toolbar.title = title
+        binding.maptoolbar.title = resources.getString(R.string.title_activity_map)
         setSupportActionBar(binding.maptoolbar)
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.getMapAsync {
@@ -54,10 +53,9 @@ class EventMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.item_profile-> {
+                R.id.item_profile -> {
                     val launcherIntent = Intent(this, ProfileActivity::class.java)
                     startActivity(launcherIntent)
-                    Timber.i("klick")
                 }
                 R.id.item_home -> {
                     val launcherIntent = Intent(this, EventListActivity::class.java)
@@ -70,18 +68,18 @@ class EventMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
                     startActivity(launcherIntent)
                 }
                 R.id.item_logout -> {
-                    app.currentUser.id= 0
-                    app.currentUser.username=""
-                    app.currentUser.password=""
-                    app.currentUser.darkmodeOn=false
+                    app.currentUser.id = 0
+                    app.currentUser.username = ""
+                    app.currentUser.password = ""
+                    app.currentUser.darkmodeOn = false
                     val launcherIntent = Intent(this, LoginActivity::class.java)
                     startActivity(launcherIntent)
                 }
-                R.id.item_map->{
-                    val launcherIntent = Intent(this,EventMapsActivity::class.java)
+                R.id.item_map -> {
+                    val launcherIntent = Intent(this, EventMapsActivity::class.java)
                     startActivity(launcherIntent)
                 }
-                R.id.item_old_events->{
+                R.id.item_old_events -> {
                     val launcherIntent = Intent(this, EventListActivity::class.java)
                     launcherIntent.putExtra("old_events", true)
                     startActivity(launcherIntent)
@@ -93,7 +91,7 @@ class EventMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
 
     fun configureMap() {
         map.setOnMarkerClickListener(this)
-        map.uiSettings.setZoomControlsEnabled(true)
+        map.uiSettings.isZoomControlsEnabled = true
         app.events.findcurrentEvents().forEach { it ->
             val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.name).position(loc)
@@ -102,30 +100,31 @@ class EventMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
-
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         if (toogle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)
-
     }
 
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val format = DecimalFormat("00")
-        currentEvent= app.events.findbyId(marker.tag as Long)!!
+        currentEvent = app.events.findbyId(marker.tag as Long)!!
         binding.currentName.text = marker.title
         binding.currentDescription.text = currentEvent.description
-        binding.currentCosts.text=currentEvent.costs.toString() + "€"
-        binding.currentDate.text= "${currentEvent.date.year} - ${currentEvent.date.month} - ${currentEvent.date.dayOfMonth}, ${format.format(currentEvent.date.hour)}:${format.format(currentEvent.date.minute)}"
-        Picasso.get().load(currentEvent.image).resize(200,200).into(binding.currentImage)
+        binding.currentCosts.text = currentEvent.costs.toString() + "€"
+        binding.currentDate.text =
+            "${currentEvent.date.year} - ${currentEvent.date.month} - ${currentEvent.date.dayOfMonth}, ${
+                format.format(currentEvent.date.hour)
+            }:${format.format(currentEvent.date.minute)}"
+        Picasso.get().load(currentEvent.image).resize(200, 200).into(binding.currentImage)
         return false
     }
 

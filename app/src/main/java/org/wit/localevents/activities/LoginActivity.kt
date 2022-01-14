@@ -2,8 +2,6 @@ package org.wit.localevents.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.snackbar.Snackbar
@@ -11,11 +9,10 @@ import org.wit.localevents.R
 import org.wit.localevents.databinding.ActivityLoginBinding
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.User
-import timber.log.Timber
 import timber.log.Timber.i
 
 
-class LoginActivity : AppCompatActivity(){
+class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     lateinit var app: MainApp
     var user = User()
@@ -33,20 +30,20 @@ class LoginActivity : AppCompatActivity(){
 
         binding.btnSignin.setOnClickListener {
             user.username = binding.username.editText?.text.toString()
-            user.password= binding.userPassword.editText?.text.toString()
+            user.password = binding.userPassword.editText?.text.toString()
             if (user.username.isEmpty()) {
                 Snackbar.make(it, R.string.hint_enter_username, Snackbar.LENGTH_LONG)
                     .show()
-            }else if(user.password.isEmpty()) {
-                Snackbar.make(it, R.string.hint_enter_password,Snackbar.LENGTH_LONG).show()
-            }else {
-                    var check = app.users.usernameExists(user.copy())
-                    if (check){
-                        Snackbar.make(it, R.string.hint_username_exist,Snackbar.LENGTH_LONG).show()
-                    }else{
-                        app.users.create(user.copy())
-                        Snackbar.make(it, R.string.hint_new_user,Snackbar.LENGTH_LONG).show()
-                    }
+            } else if (user.password.isEmpty()) {
+                Snackbar.make(it, R.string.hint_enter_password, Snackbar.LENGTH_LONG).show()
+            } else {
+                var check = app.users.usernameExists(user.copy())
+                if (check) {
+                    Snackbar.make(it, R.string.hint_username_exist, Snackbar.LENGTH_LONG).show()
+                } else {
+                    app.users.create(user.copy())
+                    Snackbar.make(it, R.string.hint_new_user, Snackbar.LENGTH_LONG).show()
+                }
 
             }
             setResult(RESULT_OK)
@@ -54,31 +51,30 @@ class LoginActivity : AppCompatActivity(){
         }
         binding.btnLogin.setOnClickListener {
             user.username = binding.username.editText?.text.toString()
-            user.password= binding.userPassword.editText?.text.toString()
+            user.password = binding.userPassword.editText?.text.toString()
             if (user.username.isEmpty()) {
                 Snackbar.make(it, R.string.hint_enter_username, Snackbar.LENGTH_LONG)
                     .show()
-            }else if(user.password.isEmpty()) {
-                Snackbar.make(it, R.string.hint_enter_password,Snackbar.LENGTH_LONG)
-            }else {
-               var check= app.users.checkData(user.copy())
-                if(check == 0L){
+            } else if (user.password.isEmpty()) {
+                Snackbar.make(it, R.string.hint_enter_password, Snackbar.LENGTH_LONG)
+            } else {
+                var check = app.users.checkData(user.copy())
+                if (check == 0L) {
                     Snackbar.make(it, R.string.hint_wrong_user_data, Snackbar.LENGTH_LONG)
                         .show()
-                }else{
+                } else {
                     i("Login successful")
-                    user.id= check
+                    user.id = check
                     app.currentUser = user.copy()
-                    if(app.currentUser.darkmodeOn){
+                    if (app.currentUser.darkmodeOn) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     }
                     setResult(RESULT_OK)
-                    val launcherIntent= Intent(this,EventListActivity::class.java)
-                    launcherIntent.putExtra("event_overview",true)
+                    val launcherIntent = Intent(this, EventListActivity::class.java)
+                    launcherIntent.putExtra("event_overview", true)
                     startActivity(launcherIntent)
                 }
             }
-
 
 
         }

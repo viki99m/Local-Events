@@ -44,11 +44,11 @@ class EventMemStore : EventStore {
 
     override fun findAllwithUser(user: User): List<EventModel> {
         val eventswithUser = ArrayList<EventModel>()
-        events.forEach { eventModel -> if(eventModel.userid== user.id){
-            eventswithUser.add(eventModel)
-             }
+        events.forEach { eventModel ->
+            if (eventModel.userid == user.id) {
+                eventswithUser.add(eventModel)
+            }
         }
-        eventswithUser.forEach { i("$it") }
         return eventswithUser
     }
 
@@ -59,8 +59,9 @@ class EventMemStore : EventStore {
 
     override fun findcurrentEvents(): List<EventModel> {
         val currentEvents = ArrayList<EventModel>()
-        events.forEach { eventModel -> if(!eventModel.date.isBefore(LocalDateTime.now())){
-            currentEvents.add(eventModel)
+        events.forEach { eventModel ->
+            if (!eventModel.date.isBefore(LocalDateTime.now())) {
+                currentEvents.add(eventModel)
             }
         }
         return currentEvents
@@ -68,9 +69,10 @@ class EventMemStore : EventStore {
 
     override fun findoldEvents(): List<EventModel> {
         val oldEvents = ArrayList<EventModel>()
-        events.forEach { eventModel -> if(eventModel.date.isBefore(LocalDateTime.now())){
-            oldEvents.add(eventModel)
-        }
+        events.forEach { eventModel ->
+            if (eventModel.date.isBefore(LocalDateTime.now())) {
+                oldEvents.add(eventModel)
+            }
         }
         return oldEvents
     }
