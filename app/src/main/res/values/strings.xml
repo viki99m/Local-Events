@@ -48,4 +48,5 @@
     <string name="placeholder_name"> Event Name</string>
     <string name="placeholder_description">Event description</string>
     <string name="hint_wrong_date">The date is in the past</string>
+    <string name="menu_old_events">Old Events</string>
 </resources>

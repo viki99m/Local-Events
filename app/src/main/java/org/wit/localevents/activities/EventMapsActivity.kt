@@ -81,6 +81,11 @@ class EventMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
                     val launcherIntent = Intent(this,EventMapsActivity::class.java)
                     startActivity(launcherIntent)
                 }
+                R.id.item_old_events->{
+                    val launcherIntent = Intent(this, EventListActivity::class.java)
+                    launcherIntent.putExtra("old_events", true)
+                    startActivity(launcherIntent)
+                }
             }
             true
         }
@@ -89,7 +94,7 @@ class EventMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
     fun configureMap() {
         map.setOnMarkerClickListener(this)
         map.uiSettings.setZoomControlsEnabled(true)
-        app.events.findAll().forEach { it ->
+        app.events.findcurrentEvents().forEach { it ->
             val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.name).position(loc)
             currentEvent = it

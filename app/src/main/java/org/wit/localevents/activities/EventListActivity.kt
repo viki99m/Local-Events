@@ -29,6 +29,7 @@ class EventListActivity : AppCompatActivity(), EventListener {
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     private var mymenu: Int = R.menu.menu_my_events
+    private var kindofpage: Int =0
     lateinit var toogle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,12 +48,21 @@ class EventListActivity : AppCompatActivity(), EventListener {
            toolbar.title = resources.getString(R.string.menu_home)
             mymenu = R.menu.menu_main
             loadEvents()
+            kindofpage=1
         }
         if (intent.hasExtra("my_events")) {
             toolbar.title = resources.getString(R.string.menu_my_events)
             mymenu = R.menu.menu_my_events
             loadUserEvent()
+            kindofpage=2
         }
+        if (intent.hasExtra("old_events")) {
+            toolbar.title = resources.getString(R.string.menu_old_events)
+            mymenu = R.menu.menu_main
+            loadOldEvents()
+            kindofpage=3
+        }
+
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -94,6 +104,12 @@ class EventListActivity : AppCompatActivity(), EventListener {
                     val launcherIntent = Intent(this,EventMapsActivity::class.java)
                     startActivity(launcherIntent)
                 }
+                R.id.item_old_events->{
+                    val launcherIntent = Intent(this, EventListActivity::class.java)
+                    launcherIntent.putExtra("old_events", true)
+                    startActivity(launcherIntent)
+                }
+
             }
             true
         }
@@ -150,21 +166,27 @@ class EventListActivity : AppCompatActivity(), EventListener {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             {
-                if (mymenu == R.menu.menu_my_events) {
+                if (kindofpage==2) {
                     loadUserEvent()
-                } else {
+                }else if(kindofpage==1) {
                     loadEvents()
-                }
+                }else{
+                    loadOldEvents()
+            }
             }
 
     }
 
     private fun loadEvents() {
-        showEvents(app.events.findAll())
+        showEvents(app.events.findcurrentEvents())
 
     }
     private fun loadUserEvent(){
         showEvents(app.events.findAllwithUser(app.currentUser))
+    }
+    private fun loadOldEvents(){
+
+        showEvents(app.events.findoldEvents())
     }
 
     fun showEvents (events: List<EventModel>) {

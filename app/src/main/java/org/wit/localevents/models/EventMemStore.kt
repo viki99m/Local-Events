@@ -2,6 +2,7 @@ package org.wit.localevents.models
 
 
 import timber.log.Timber.i
+import java.time.LocalDateTime
 
 var lastIdEvent = 0L
 
@@ -55,6 +56,25 @@ class EventMemStore : EventStore {
         var foundevent: EventModel? = events.find { p -> p.id == id }
         return foundevent
     }
+
+    override fun findcurrentEvents(): List<EventModel> {
+        val currentEvents = ArrayList<EventModel>()
+        events.forEach { eventModel -> if(!eventModel.date.isBefore(LocalDateTime.now())){
+            currentEvents.add(eventModel)
+            }
+        }
+        return currentEvents
+    }
+
+    override fun findoldEvents(): List<EventModel> {
+        val oldEvents = ArrayList<EventModel>()
+        events.forEach { eventModel -> if(eventModel.date.isBefore(LocalDateTime.now())){
+            oldEvents.add(eventModel)
+        }
+        }
+        return oldEvents
+    }
+
 
     private fun logAll() {
         events.forEach { i("$it") }

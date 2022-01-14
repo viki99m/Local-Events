@@ -16,6 +16,12 @@
                 android:icon="@drawable/ic_map"
                 android:title="@string/menu_map"
                 app:showAsAction="never"/>
+            <item
+                android:id="@+id/item_old_events"
+                android:icon="@drawable/ic_old_events"
+                android:title="@string/menu_old_events"
+                app:showAsAction="never"/>
+
 
         </menu>
     </item>

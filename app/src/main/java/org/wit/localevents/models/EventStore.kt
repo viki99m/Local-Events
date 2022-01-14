@@ -7,4 +7,6 @@ interface EventStore {
     fun delete(event: EventModel)
     fun findAllwithUser(user: User): List<EventModel>
     fun findbyId(id:Long):EventModel?
+    fun findcurrentEvents():List<EventModel>
+    fun findoldEvents():List<EventModel>
 }

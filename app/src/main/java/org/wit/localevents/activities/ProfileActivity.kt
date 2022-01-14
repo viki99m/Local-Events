@@ -88,6 +88,11 @@ class ProfileActivity : AppCompatActivity() {
                         val launcherIntent = Intent(this, LoginActivity::class.java)
                         startActivity(launcherIntent)
                     }
+                    R.id.item_old_events->{
+                        val launcherIntent = Intent(this, EventListActivity::class.java)
+                        launcherIntent.putExtra("old_events", true)
+                        startActivity(launcherIntent)
+                    }
 
                 }
                 true
@@ -153,7 +158,6 @@ class ProfileActivity : AppCompatActivity() {
         }
         private fun setButtontoSave():Boolean{
             kindofButton=1
-
             binding.buttonEditUser.setText(R.string.button_save_changes)
             binding.editUsername.isEnabled= true
             binding.editPassword.isEnabled= true
