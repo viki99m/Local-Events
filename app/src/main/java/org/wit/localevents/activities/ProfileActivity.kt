@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
@@ -63,6 +65,10 @@ class ProfileActivity : AppCompatActivity() {
                         launcherIntent.putExtra("event_overview", true)
                         startActivity(launcherIntent)
                     }
+                    R.id.item_map->{
+                        val launcherIntent = Intent(this,EventMapsActivity::class.java)
+                        startActivity(launcherIntent)
+                    }
                     R.id.item_myEvents -> {
                         val launcherIntent = Intent(this, EventListActivity::class.java)
                         launcherIntent.putExtra("my_events", true)
@@ -112,6 +118,7 @@ class ProfileActivity : AppCompatActivity() {
                 }
 
             }
+
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -140,6 +147,7 @@ class ProfileActivity : AppCompatActivity() {
 
         return true
         }
+
 
 
 }

@@ -48,6 +48,11 @@ class EventMemStore : EventStore {
         return eventswithUser
     }
 
+    override fun findbyId(id: Long): EventModel? {
+        var foundevent: EventModel? = events.find { p -> p.id == id }
+        return foundevent
+    }
+
     private fun logAll() {
         events.forEach { i("$it") }
     }

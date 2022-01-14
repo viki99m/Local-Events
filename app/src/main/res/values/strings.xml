@@ -43,4 +43,8 @@
     <string name="text_darkmode">Dark Mode</string>
     <string name="button_edit_user">Change your Userdata</string>
     <string name="welchome_message">Welcome to Local Events</string>
+    <string name="menu_map">Event Map</string>
+    <string name="placeholder_image">Image</string>
+    <string name="placeholder_name"> Event Name</string>
+    <string name="placeholder_description">Event description</string>
 </resources>

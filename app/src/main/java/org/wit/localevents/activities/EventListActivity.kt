@@ -92,10 +92,13 @@ class EventListActivity : AppCompatActivity(), EventListener {
                     val launcherIntent = Intent(this, LoginActivity::class.java)
                     startActivity(launcherIntent)
                 }
+                R.id.item_map->{
+                    val launcherIntent = Intent(this,EventMapsActivity::class.java)
+                    startActivity(launcherIntent)
+                }
             }
             true
         }
-        binding
 
         registerRefreshCallback()
         registerMapCallback()

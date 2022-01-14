@@ -13,10 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LocalEvents">
-        <activity
-            android:name=".activities.ProfileActivity"
-            android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
@@ -25,6 +21,13 @@
             android:name=".activities.MapActivity"
             android:exported="true"
             android:label="@string/title_activity_map" />
+        <activity
+            android:name=".activities.EventMapsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true">
@@ -36,17 +39,13 @@
         </activity>
         <activity
             android:name=".activities.EventActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activities.MenuActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activities.EventListActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

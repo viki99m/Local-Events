@@ -16,20 +16,15 @@ import org.wit.localevents.R
 import org.wit.localevents.databinding.ActivityMapBinding
 import org.wit.localevents.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener{
+class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener{
 
     private lateinit var map: GoogleMap
-    private lateinit var binding: ActivityMapBinding
     var location = Location()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_map)
+        setContentView(R.layout.activity_map)
         location = intent.extras?.getParcelable<Location>("location")!!
-        binding = ActivityMapBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -47,6 +42,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarker
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
         map.setOnMarkerDragListener(this)
+        map.setOnMarkerClickListener(this)
     }
 
     override fun onMarkerDragStart(marker: Marker) {
@@ -55,6 +51,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarker
 
     override fun onMarkerDrag(maker: Marker) {
 
+    }
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val loc = LatLng(location.lat, location.lng)
+        marker.snippet = "GPS : $loc"
+        return false
     }
 
     override fun onMarkerDragEnd(marker: Marker) {
