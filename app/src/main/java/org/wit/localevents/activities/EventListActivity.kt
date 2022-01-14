@@ -20,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import org.wit.localevents.adapter.EventAdapter
+import org.wit.localevents.models.Location
 import timber.log.Timber.i
 
 
@@ -28,6 +29,7 @@ class EventListActivity : AppCompatActivity(), EventListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityEventListBinding
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
+    lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     private var mymenu: Int = R.menu.menu_my_events
     lateinit var toogle: ActionBarDrawerToggle
 
@@ -93,8 +95,10 @@ class EventListActivity : AppCompatActivity(), EventListener {
             }
             true
         }
+        binding
 
         registerRefreshCallback()
+        registerMapCallback()
 
     }
 
@@ -125,6 +129,12 @@ class EventListActivity : AppCompatActivity(), EventListener {
         refreshIntentLauncher.launch(launcherIntent)
     }
 
+    override fun onButtonLocationClick(location: Location) {
+        val launcherIntent = Intent(this,MapActivity::class.java)
+            .putExtra("location", location)
+        mapIntentLauncher.launch(launcherIntent)
+    }
+
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -132,13 +142,11 @@ class EventListActivity : AppCompatActivity(), EventListener {
                 loadEvents() }
     }
 
-   /*private fun registerMapCallback() {
+   private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            {  }
+            { loadEvents() }
     }
-
-    */
 
     private fun loadEvents() {
         showEvents(app.events.findAll())
