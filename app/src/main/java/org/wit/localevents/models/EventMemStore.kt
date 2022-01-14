@@ -42,9 +42,12 @@ class EventMemStore : EventStore {
     }
 
     override fun findAllwithUser(user: User): List<EventModel> {
-        val eventswithUser = events
-        // different between users
-
+        val eventswithUser = ArrayList<EventModel>()
+        events.forEach { eventModel -> if(eventModel.userid== user.id){
+            eventswithUser.add(eventModel)
+             }
+        }
+        eventswithUser.forEach { i("$it") }
         return eventswithUser
     }
 

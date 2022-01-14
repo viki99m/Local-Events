@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,6 @@ import org.wit.localevents.adapter.EventListener
 import org.wit.localevents.databinding.ActivityEventListBinding
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.EventModel
-import java.util.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
@@ -46,12 +44,12 @@ class EventListActivity : AppCompatActivity(), EventListener {
         binding.recyclerView.layoutManager = layoutManager
 
         if (intent.hasExtra("event_overview")) {
-           toolbar.title = "Home"
+           toolbar.title = resources.getString(R.string.menu_home)
             mymenu = R.menu.menu_main
             loadEvents()
         }
         if (intent.hasExtra("my_events")) {
-            toolbar.title = "My Events"
+            toolbar.title = resources.getString(R.string.menu_my_events)
             mymenu = R.menu.menu_my_events
             loadUserEvent()
         }
@@ -106,8 +104,8 @@ class EventListActivity : AppCompatActivity(), EventListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(mymenu, menu)
 
+        menuInflater.inflate(mymenu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -127,9 +125,12 @@ class EventListActivity : AppCompatActivity(), EventListener {
     }
 
     override fun onEventClick(event: EventModel) {
-        val launcherIntent = Intent(this, EventActivity::class.java)
-        launcherIntent.putExtra("event_edit", event)
-        refreshIntentLauncher.launch(launcherIntent)
+        if(mymenu== R.menu.menu_my_events){
+            val launcherIntent = Intent(this, EventActivity::class.java)
+            launcherIntent.putExtra("event_edit", event)
+            refreshIntentLauncher.launch(launcherIntent)
+        }
+
     }
 
     override fun onButtonLocationClick(location: Location) {
@@ -142,13 +143,20 @@ class EventListActivity : AppCompatActivity(), EventListener {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             {
-                loadEvents() }
+                loadUserEvent() }
     }
 
    private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { loadEvents() }
+            {
+                if (mymenu == R.menu.menu_my_events) {
+                    loadUserEvent()
+                } else {
+                    loadEvents()
+                }
+            }
+
     }
 
     private fun loadEvents() {
@@ -162,6 +170,5 @@ class EventListActivity : AppCompatActivity(), EventListener {
     fun showEvents (events: List<EventModel>) {
         binding.recyclerView.adapter = EventAdapter(events, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
-        i("${binding.recyclerView.adapter}")
     }
 }

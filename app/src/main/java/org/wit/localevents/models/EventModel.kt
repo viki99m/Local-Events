@@ -14,7 +14,8 @@ data class EventModel(
     var date: LocalDateTime= LocalDateTime.of(0,1,1,1,1,1),
     var organizer: String = "",
     var location: Location = Location(),
-    var image: Uri = Uri.EMPTY
+    var image: Uri = Uri.EMPTY,
+    var userid: Long = 0
 ):Parcelable
 // evtl. category
 

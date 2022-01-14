@@ -71,6 +71,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             event = intent.extras?.getParcelable("event_edit")!!
             binding.eventName.setText(event.name)
             binding.eventDescription.setText(event.description)
+            costs=event.costs
             numberPicker.value = event.costs
             binding.eventOrganizer.setText(event.organizer)
             binding.showDate.text = "${event.date.year} - ${event.date.month} - ${event.date.dayOfMonth}, ${format.format(event.date.hour)}:${format.format(event.date.minute)}"
@@ -96,7 +97,8 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             event.costs= costs
             event.location= location
             event.date = LocalDateTime.of(saveYear,saveMonth,saveDayofMonth,saveHour,saveMinute)
-
+            event.userid= app.currentUser.id
+            i("${app.currentUser.id}")
 
             if (event.name.isEmpty()) {
                 Snackbar.make(it,R.string.hint_enter_event_name, Snackbar.LENGTH_LONG)
@@ -108,6 +110,8 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,Ti
             else if (event.date.year==0){
                 Snackbar.make(it,R.string.hint_enter_date, Snackbar.LENGTH_LONG)
                     .show()
+            }else if(event.date.isBefore(LocalDateTime.now())){
+                Snackbar.make(it,R.string.hint_wrong_date,Snackbar.LENGTH_LONG).show()
             }
             else {
                 if (edit) {

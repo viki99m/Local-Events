@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -46,14 +47,15 @@ class ProfileActivity : AppCompatActivity() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
             setButtontoChangeUserdata()
+            initializeDarkModeButton()
 
             binding.switchDarkmode.setOnClickListener {
                 if(binding.switchDarkmode.isChecked){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    setDefaultNightMode(MODE_NIGHT_YES)
                     app.currentUser.darkmodeOn = true
 
                 }else{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    setDefaultNightMode(MODE_NIGHT_NO)
                     app.currentUser.darkmodeOn = false
                 }
             }
@@ -121,7 +123,18 @@ class ProfileActivity : AppCompatActivity() {
 
         }
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    private fun initializeDarkModeButton() {
+        if(getDefaultNightMode() == MODE_NIGHT_YES){
+            app.currentUser.darkmodeOn = true
+            binding.switchDarkmode.isChecked= true
+
+        }else{
+            app.currentUser.darkmodeOn = false
+            binding.switchDarkmode.isChecked=false
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
             if (toogle.onOptionsItemSelected(item)) {
                 return true
             }

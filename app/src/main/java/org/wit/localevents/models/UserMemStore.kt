@@ -21,15 +21,15 @@ class UserMemStore : UserStore {
             return users
         }
 
-        override fun create(user: User): Boolean {
+        override fun create(user: User): Long {
             var founduser: User? = users.find { p -> p.username == user.username }
             if(founduser == null){
                 user.id = getIdUser()
                 users.add(user)
                 logAll()
-                return true
+                return user.id
             }else{
-                return false
+                return 0
             }
         }
 
@@ -53,13 +53,15 @@ class UserMemStore : UserStore {
             users.forEach { Timber.i("$it") }
         }
 
-    override fun checkData(user: User): Boolean {
+    override fun checkData(user: User): Long {
         var founduser: User ?= users.find{p -> p.username == user.username}
         if (founduser!= null){
-            return founduser.password == user.password
-        }else{
-            return false
+            if(founduser.password == user.password){
+                return founduser.id
+            }
         }
+
+        return 0
     }
 
     override fun usernameExists(user: User): Boolean {

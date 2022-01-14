@@ -62,11 +62,12 @@ class LoginActivity : AppCompatActivity(){
                 Snackbar.make(it, R.string.hint_enter_password,Snackbar.LENGTH_LONG)
             }else {
                var check= app.users.checkData(user.copy())
-                if(!check){
+                if(check == 0L){
                     Snackbar.make(it, R.string.hint_wrong_user_data, Snackbar.LENGTH_LONG)
                         .show()
                 }else{
                     i("Login successful")
+                    user.id= check
                     app.currentUser = user.copy()
                     if(app.currentUser.darkmodeOn){
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
