@@ -8,6 +8,7 @@ import com.squareup.picasso.Picasso
 import org.wit.localevents.databinding.CardEventBinding
 import org.wit.localevents.models.EventModel
 import org.wit.localevents.models.Location
+import timber.log.Timber
 import java.time.format.DateTimeFormatter
 
 interface EventListener {
@@ -47,8 +48,8 @@ class EventAdapter constructor(
             binding.eventDescription.text = event.description
             binding.showCosts.text = event.costs.toString() + "€"
             binding.showDate.text = dateformat.format(event.date)
+            Timber.i("${event.image}")
             Picasso.get().load(event.image).resize(200, 200).into(binding.imageIcon)
-
             binding.root.setOnClickListener { listener.onEventClick(event) }
             binding.showLocation.setOnClickListener { listener.onButtonLocationClick(location) }
         }

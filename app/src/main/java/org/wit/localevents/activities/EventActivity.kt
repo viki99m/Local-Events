@@ -87,7 +87,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             location = event.location
 
             binding.buttonAddEvent.setText(R.string.button_save_changes)
-            binding.eventChooseLocation.setText(R.string.button_change_event_image)
+            binding.eventChooseImage.setText(R.string.button_change_event_image)
             if (event.image != Uri.EMPTY) {
                 Picasso.get()
                     .load(event.image)
