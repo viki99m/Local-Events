@@ -50,20 +50,6 @@
 
         </ImageView>
 
-        <TextView
-            android:id="@+id/show_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:textColor="?android:attr/colorForeground"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
         <Button
             android:id="@+id/button_edit_user"
             android:layout_width="wrap_content"
@@ -91,7 +77,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:autofillHints="hint"
             android:hint="@string/placeholder_username"
             android:inputType="text"
@@ -100,7 +86,7 @@
             app:counterMaxLength="25"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/show_email"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
             app:startIconDrawable="@drawable/ic_baseline_person_24">
 
             <com.google.android.material.textfield.TextInputEditText
