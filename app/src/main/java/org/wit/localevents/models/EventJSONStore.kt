@@ -5,7 +5,6 @@ import android.net.Uri
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
 import org.wit.localevents.helpers.*
-import timber.log.Timber
 import timber.log.Timber.i
 import java.lang.reflect.Type
 import java.time.LocalDateTime
@@ -46,7 +45,7 @@ class EventJSONStore(private val context: Context) : EventStore {
 
 
     override fun update(event: EventModel) {
-        var foundevent: EventModel? = events.find { p -> p.id == event.id }
+        val foundevent: EventModel? = events.find { p -> p.id == event.id }
         if (foundevent != null) {
             foundevent.name = event.name
             foundevent.description = event.description
@@ -76,7 +75,7 @@ class EventJSONStore(private val context: Context) : EventStore {
     }
 
     override fun findbyId(id: Long): EventModel? {
-        var foundevent: EventModel? = events.find { p -> p.id == id }
+        val foundevent: EventModel? = events.find { p -> p.id == id }
         return foundevent
     }
 
@@ -111,7 +110,7 @@ class EventJSONStore(private val context: Context) : EventStore {
     }
 
     private fun logAll() {
-        events.forEach { Timber.i("$it") }
+        events.forEach { i("$it") }
     }
 }
 

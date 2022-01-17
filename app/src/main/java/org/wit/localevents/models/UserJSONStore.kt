@@ -48,7 +48,7 @@ class UserJSONStore(private val context: Context) : UserStore {
     }
 
     override fun create(user: User): Long {
-        var founduser: User? = users.find { p -> p.username == user.username }
+        val founduser: User? = users.find { p -> p.email == user.email }
         if (founduser == null) {
             user.id = generateRandomId()
             users.add(user)
@@ -61,10 +61,11 @@ class UserJSONStore(private val context: Context) : UserStore {
     }
 
     override fun update(user: User): Boolean {
-        var founduser: User? = users.find { p -> p.id == user.id }
+        val founduser: User? = users.find { p -> p.id == user.id }
         if (founduser != null) {
             founduser.username = user.username
             founduser.password = user.password
+            founduser.darkmodeOn= user.darkmodeOn
             serialize()
             return true
         } else {
@@ -78,19 +79,29 @@ class UserJSONStore(private val context: Context) : UserStore {
     }
 
     override fun checkData(user: User): Long {
-        var founduser: User? = users.find { p -> p.username == user.username }
+        val founduser: User? = users.find { p -> p.username == user.username }
         if (founduser != null) {
-            if (founduser.password == user.password) {
+            if (founduser.password == user.password&& founduser.email == user.email) {
                 return founduser.id
             }
         }
         return 0
     }
 
-    override fun usernameExists(user: User): Boolean {
-        var founduser: User? = users.find { p -> p.username == user.username }
+    override fun findUserbyID(id: Long): User? {
+        val founduser: User? = users.find { p -> p.id == id }
+        return founduser
+    }
+
+    override fun mailExists(mail: String): Boolean {
+        val founduser: User? = users.find { p -> p.email == mail }
         return founduser != null
     }
+    override fun findUserbyMail (mail:String): User? {
+        val founduser: User? = users.find { p -> p.email == mail}
+        return founduser
+    }
+
 }
 
 class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {

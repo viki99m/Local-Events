@@ -18,7 +18,7 @@ class UserMemStore : UserStore {
     }
 
     override fun create(user: User): Long {
-        var founduser: User? = users.find { p -> p.username == user.username }
+        val founduser: User? = users.find { p -> p.email == user.email }
         if (founduser == null) {
             user.id = getIdUser()
             users.add(user)
@@ -30,10 +30,11 @@ class UserMemStore : UserStore {
     }
 
     override fun update(user: User): Boolean {
-        var founduser: User? = users.find { p -> p.id == user.id }
+        val founduser: User? = users.find { p -> p.id == user.id }
         if (founduser != null) {
             founduser.username = user.username
             founduser.password = user.password
+            founduser.darkmodeOn= user.darkmodeOn
             return true
         } else {
             return false
@@ -49,19 +50,26 @@ class UserMemStore : UserStore {
     }
 
     override fun checkData(user: User): Long {
-        var founduser: User? = users.find { p -> p.username == user.username }
+        val founduser: User? = users.find { p -> p.username == user.username }
         if (founduser != null) {
-            if (founduser.password == user.password) {
+            if (founduser.password == user.password && founduser.email == user.email) {
                 return founduser.id
             }
         }
         return 0
     }
 
-    override fun usernameExists(user: User): Boolean {
-        var founduser: User? = users.find { p -> p.username == user.username }
-        return founduser != null
+    override fun findUserbyID(id: Long): User? {
+        val founduser: User? = users.find { p -> p.id == id }
+        return founduser
     }
 
-
+    override fun mailExists(mail: String): Boolean {
+        val founduser: User? = users.find { p -> p.email == mail }
+        return founduser != null
+    }
+    override fun findUserbyMail (mail:String): User? {
+        val founduser: User? = users.find { p -> p.email == mail}
+        return founduser
+    }
 }

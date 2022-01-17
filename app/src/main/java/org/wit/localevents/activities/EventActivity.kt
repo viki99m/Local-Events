@@ -36,13 +36,13 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     var location = Location(49.01992541291023, 12.098539934552333, 15f)
     var edit = false
 
+    // Variablen for Date- and Timepicker
     var costs = 0
     var dayofMonth = 0
     var month = 0
     var year = 0
     var minute = 0
     var hour = 0
-
     var saveDayofMonth = 1
     var saveMonth = 1
     var saveYear = 0
@@ -61,12 +61,14 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
 
+        // Initialize NumberPicker
         numberPicker.minValue = 0
         numberPicker.maxValue = 1000
         numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
             costs = newVal
         }
 
+        // if Event is on edit Mode
         if (intent.hasExtra("event_edit")) {
             edit = true
             event = intent.extras?.getParcelable("event_edit")!!
@@ -89,6 +91,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             binding.buttonAddEvent.setText(R.string.button_save_changes)
             binding.eventChooseImage.setText(R.string.button_change_event_image)
             if (event.image != Uri.EMPTY) {
+
                 Picasso.get()
                     .load(event.image)
                     .into(binding.eventImage)
@@ -183,7 +186,7 @@ class EventActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         saveDayofMonth = dayOfMonth
-        saveMonth = month + 1 // Cause the couter begins at 0
+        saveMonth = month + 1 // Cause the counter begins at 0
         saveYear = year
 
         getDateTimeCalandar()

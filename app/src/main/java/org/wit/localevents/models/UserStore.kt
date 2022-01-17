@@ -6,5 +6,7 @@ interface UserStore {
     fun update(user:User):Boolean
     fun delete(user: User)
     fun checkData(user: User):Long
-    fun usernameExists(user:User): Boolean
+    fun findUserbyID(id: Long): User?
+    fun mailExists(mail: String): Boolean
+    fun findUserbyMail(mail: String): User?
 }

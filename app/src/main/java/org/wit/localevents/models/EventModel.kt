@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 @Parcelize
 data class EventModel(
     var id: Long = 0,
+    var fbId: String ="",
     var name: String = "",
     var description: String = "",
     var costs: Int = 0,
@@ -17,7 +18,6 @@ data class EventModel(
     var image: Uri = Uri.EMPTY,
     var userid: Long = 0
 ) : Parcelable
-// evtl. category
 
 @Parcelize
 data class Location(

@@ -25,7 +25,7 @@ class EventMemStore : EventStore {
     }
 
     override fun update(event: EventModel) {
-        var foundevent: EventModel? = events.find { p -> p.id == event.id }
+        val foundevent: EventModel? = events.find { p -> p.id == event.id }
         if (foundevent != null) {
             foundevent.name = event.name
             foundevent.description = event.description
@@ -53,7 +53,7 @@ class EventMemStore : EventStore {
     }
 
     override fun findbyId(id: Long): EventModel? {
-        var foundevent: EventModel? = events.find { p -> p.id == id }
+        val foundevent: EventModel? = events.find { p -> p.id == id }
         return foundevent
     }
 
@@ -76,7 +76,6 @@ class EventMemStore : EventStore {
         }
         return oldEvents
     }
-
 
     private fun logAll() {
         events.forEach { i("$it") }

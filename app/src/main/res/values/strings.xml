@@ -11,19 +11,22 @@
     <string name="button_save_changes">Save Changes</string>
     <string name="button_edit_user">Change your Userdata</string>
     <string name="button_change_event_image">Change Event image</string>
+    <string name="button_delete_user">Delete my Account</string>
+    <string name="button_signin_google">Signin with Google</string>
 
     <!-- Hints -->
     <string name="hint_enter_password">Enter a Password</string>
-    <string name="hint_enter_username">Enter a Username</string>
-    <string name="hint_wrong_user_data">Username or Password are wrong</string>
+    <string name="hint_enter_username">Enter your Name</string>
+    <string name="hint_wrong_user_data">Username,Email or Password are wrong</string>
     <string name="hint_event_name">Enter a Event Name</string>
     <string name="hint_event_costs">Enter Entrance Costs</string>
     <string name="hint_event_description">Enter a Description </string>
     <string name="hint_event_date">Select a Date and Time</string>
     <string name="hint_event_organizer">Enter a organizer</string>
-    <string name="hint_username_exist">The Username already exists</string>
     <string name="hint_new_user">Thank you for Signin in Local Events</string>
     <string name="hint_wrong_date">The date is in the past</string>
+    <string name="hint_enter_email">Enter your email</string>
+    <string name="hint_email_exsits">This email already exists</string>
 
     <!-- Menu -->
     <string name="menu_addEvent">Add</string>
@@ -44,8 +47,9 @@
     <string name="placeholder_description">Event description</string>
     <string name="placeholder_date">Date</string>
     <string name="placeholder_costs">Costs</string>
-    <string name="placeholder_username">Username</string>
+    <string name="placeholder_username">Name</string>
     <string name="placeholder_password">Password</string>
+    <string name="placeholder_email">Email</string>
 
     <!-- Others -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

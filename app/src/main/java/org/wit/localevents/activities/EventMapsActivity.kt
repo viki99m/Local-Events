@@ -18,6 +18,7 @@ import org.wit.localevents.R
 import org.wit.localevents.databinding.ActivityEventMapsBinding
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.EventModel
+import org.wit.localevents.models.User
 import java.text.DecimalFormat
 
 
@@ -40,6 +41,7 @@ class EventMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
             map = it
             configureMap()
         }
+        // Drawer Navigation
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         toogle = ActionBarDrawerToggle(
@@ -68,10 +70,7 @@ class EventMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
                     startActivity(launcherIntent)
                 }
                 R.id.item_logout -> {
-                    app.currentUser.id = 0
-                    app.currentUser.username = ""
-                    app.currentUser.password = ""
-                    app.currentUser.darkmodeOn = false
+                    app.currentUser = User()
                     val launcherIntent = Intent(this, LoginActivity::class.java)
                     startActivity(launcherIntent)
                 }
@@ -96,7 +95,7 @@ class EventMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
             val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.name).position(loc)
             currentEvent = it
-            map.addMarker(options).tag = it.id
+            map.addMarker(options)?.tag = it.id
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
     }

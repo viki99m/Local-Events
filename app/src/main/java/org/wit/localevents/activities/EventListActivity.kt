@@ -19,7 +19,7 @@ import org.wit.localevents.databinding.ActivityEventListBinding
 import org.wit.localevents.main.MainApp
 import org.wit.localevents.models.EventModel
 import org.wit.localevents.models.Location
-import timber.log.Timber.i
+import org.wit.localevents.models.User
 
 
 class EventListActivity : AppCompatActivity(), EventListener {
@@ -39,7 +39,7 @@ class EventListActivity : AppCompatActivity(), EventListener {
         app = application as MainApp
 
         setSupportActionBar(findViewById(R.id.topAppBar))
-        var toolbar = findViewById<MaterialToolbar>(R.id.topAppBar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.topAppBar)
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
 
@@ -62,7 +62,7 @@ class EventListActivity : AppCompatActivity(), EventListener {
             kindofpage = 3
         }
 
-
+        //Drawer Navigation
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         toogle = ActionBarDrawerToggle(
@@ -91,10 +91,7 @@ class EventListActivity : AppCompatActivity(), EventListener {
                     startActivity(launcherIntent)
                 }
                 R.id.item_logout -> {
-                    app.currentUser.id = 0
-                    app.currentUser.username = ""
-                    app.currentUser.password = ""
-                    app.currentUser.darkmodeOn = false
+                    app.currentUser = User()
                     val launcherIntent = Intent(this, LoginActivity::class.java)
                     startActivity(launcherIntent)
                 }
