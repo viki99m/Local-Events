@@ -32,7 +32,7 @@ Also you can open here the Navigation Drawer Menu
 ### Profile Activity
 - show the current user 
 - change current user data with the Button (same Button for save the Data)
-- delete user 
+- delete user by pressing the Button
 - set DarkMode (is saved in the User object(so if you login again it will change))
 Also you can open here the Navigation Drawer Menu 
 
